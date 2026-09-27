@@ -9,6 +9,15 @@ public class Constants {
     public static final double STRAFE_POD_OFFSET = -1.625;
   }
 
+  public static class IntakeConstants {
+    public static final String INTAKE_ID = "intakeMotor";
+
+    public static final double INTAKE_OUT_VELOCITY = 7000;
+    public static final double INTAKE_VELOCITY = 1500;
+    public static final double EXPEL_VELOCITY = 1500;
+    public static final double INTAKE_MAX_VELOCITY = 7000; // in RPM, 312
+  }
+
   public static class DriveConstants {
     public static final String FRONT_LEFT_MOTOR_ID = "frontLeftMotor";
     public static final String FRONT_RIGHT_MOTOR_ID = "frontRightMotor";
