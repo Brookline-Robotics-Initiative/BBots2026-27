@@ -6,12 +6,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.CommandScheduler;
 import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.turtletracerlib.pathing.NamedCommands;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Intake;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 
 public class RobotContainer {
   // Subsystems
@@ -25,6 +30,7 @@ public class RobotContainer {
   private final GamepadEx gamepad1;
   private final GamepadEx gamepad2;
   private final CommandOpMode JavaBot;
+  private Intake intake;
 
   public enum gameMode {
     Auto,
@@ -62,8 +68,9 @@ public class RobotContainer {
     // being implemented
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    intake = new Intake(hardwareMap);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(drive, autoDrive, intake);
   }
 
   public void configureTeleOp() {
@@ -88,7 +95,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Gamepad 1 buttons
     // Gamepad 2 buttons
-
+    new GamepadButton(gamepad1, GamepadKeys.Button.B).whenHeld(new IntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenHeld(new ExpelIntakeCommand(intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
