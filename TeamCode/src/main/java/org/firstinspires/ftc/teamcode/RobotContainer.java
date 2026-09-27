@@ -6,17 +6,24 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.CommandScheduler;
 import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.turtletracerlib.pathing.NamedCommands;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Commands.SpindexerAgitateCommand;
+import org.firstinspires.ftc.teamcode.Commands.SpindexerOutCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
 
 public class RobotContainer {
   // Subsystems
   private Drivetrain drive;
   private Drivetrain autoDrive;
+  private Spindexer spindexer;
+
   private PinpointLocalizer pinpoint;
 
   // Dependencies
@@ -62,6 +69,7 @@ public class RobotContainer {
     // being implemented
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(drive, autoDrive);
   }
@@ -87,6 +95,8 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Gamepad 1 buttons
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
     // Gamepad 2 buttons
 
   }
