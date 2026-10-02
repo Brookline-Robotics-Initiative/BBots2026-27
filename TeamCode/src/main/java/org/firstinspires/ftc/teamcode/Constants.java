@@ -24,4 +24,10 @@ public class Constants {
         public static final double EXPEL_VELOCITY = 1500; //FIXME: test and change
         public static final double INTAKE_MAX_VELOCITY = 7000; // in RPM, 312 //FIXME: test and chance
     }
+  public static class SpindexerConstants {
+    public static final String SPIN_ID = "spindexerMotor";
+
+    public static final double SPIN_VELOCITY = 1000; //TODO: Change
+    public static final double SPIN_MAX_VELOCITY = 7000; //rpm
+  }
 }
