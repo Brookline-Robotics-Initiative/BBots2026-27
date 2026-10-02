@@ -17,4 +17,11 @@ public class Constants {
 
     public static final String IMU_ID = "imu";
   }
+
+  public static class SpindexerConstants {
+    public static final String SPIN_ID = "spindexerMotor";
+
+    public static final double SPIN_VELOCITY = 1000; //TODO: Change
+    public static final double SPIN_MAX_VELOCITY = 7000; //rpm
+  }
 }
