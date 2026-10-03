@@ -13,9 +13,12 @@ import com.turtletracerlib.pathing.NamedCommands;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
+//import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.SpindexerAgitateCommand;
 import org.firstinspires.ftc.teamcode.Commands.SpindexerOutCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
 import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
 
 public class RobotContainer {
@@ -23,6 +26,7 @@ public class RobotContainer {
   private Drivetrain drive;
   private Drivetrain autoDrive;
   private Spindexer spindexer;
+  private Outtake outtake;
 
   private PinpointLocalizer pinpoint;
 
@@ -70,6 +74,7 @@ public class RobotContainer {
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     spindexer = new Spindexer(hardwareMap);
+    outtake = new Outtake(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(drive, autoDrive);
   }
@@ -97,6 +102,8 @@ public class RobotContainer {
     // Gamepad 1 buttons
     new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
     new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
+    new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
+    //new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
     // Gamepad 2 buttons
 
   }

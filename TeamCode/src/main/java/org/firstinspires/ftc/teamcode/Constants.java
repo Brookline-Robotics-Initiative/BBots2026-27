@@ -24,4 +24,12 @@ public class Constants {
     public static final double SPIN_VELOCITY = 1000; //TODO: Change
     public static final double SPIN_MAX_VELOCITY = 7000; //rpm
   }
+
+  public static class OuttakeConstants {
+    public static final String OUTTAKE_ID = "outtakeMotor";
+    public static final double OUTTAKE_MAX_VELOCITY =  7000;
+
+    public static final double OUTTAKE_SPEED = 3000; //TODO!!!
+    public static final int OUTTAKE_START_POSITION = 0; //TODO!!!
+  }
 }
