@@ -19,6 +19,9 @@ import org.firstinspires.ftc.teamcode.Commands.SpindexerAgitateCommand;
 import org.firstinspires.ftc.teamcode.Commands.SpindexerOutCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
+import org.firstinspires.ftc.teamcode.Subsystems.Intake;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
 
 public class RobotContainer {
@@ -27,6 +30,7 @@ public class RobotContainer {
   private Drivetrain autoDrive;
   private Spindexer spindexer;
   private Outtake outtake;
+  private Intake intake;
 
   private PinpointLocalizer pinpoint;
 
@@ -36,6 +40,7 @@ public class RobotContainer {
   private final GamepadEx gamepad1;
   private final GamepadEx gamepad2;
   private final CommandOpMode JavaBot;
+
 
   public enum gameMode {
     Auto,
@@ -73,10 +78,11 @@ public class RobotContainer {
     // being implemented
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    intake = new Intake(hardwareMap);
     spindexer = new Spindexer(hardwareMap);
     outtake = new Outtake(hardwareMap);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(drive, autoDrive, intake);
   }
 
   public void configureTeleOp() {
@@ -105,7 +111,8 @@ public class RobotContainer {
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     //new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
     // Gamepad 2 buttons
-
+    new GamepadButton(gamepad1, GamepadKeys.Button.B).whenHeld(new IntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenHeld(new ExpelIntakeCommand(intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
