@@ -26,6 +26,7 @@ public class RobotContainer {
   private Drivetrain drive;
   private Drivetrain autoDrive;
   private Spindexer spindexer;
+  private Intake intake;
 
   private PinpointLocalizer pinpoint;
 
@@ -35,7 +36,7 @@ public class RobotContainer {
   private final GamepadEx gamepad1;
   private final GamepadEx gamepad2;
   private final CommandOpMode JavaBot;
-  private Intake intake;
+
 
   public enum gameMode {
     Auto,
