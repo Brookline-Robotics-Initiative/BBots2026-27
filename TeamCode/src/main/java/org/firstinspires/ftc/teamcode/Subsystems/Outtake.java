@@ -20,7 +20,7 @@ public class Outtake extends SubsystemBase {
     public Outtake(final HardwareMap hwMap){
         outtakeMotor = new MotorEx (hwMap, Constants.OuttakeConstants.OUTTAKE_ID);
         encoder = outtakeMotor.encoder;
-        outtakeMotor.setRunMode(Motor.RunMode.VelocityControl);
+        outtakeMotor.setRunMode(Motor.RunMode.RawPower);
         //pidf = new PIDFController(0.0, 0.0, 0.0, 0.0); //TODO
     }
 
@@ -28,6 +28,10 @@ public class Outtake extends SubsystemBase {
         if (velocity >= MIN_VELOCITY && velocity <= MAX_VELOCITY) {
             outtakeMotor.setVelocity(velocity);
         }
+    }
+
+    public void setPower(final double power){
+        outtakeMotor.set(power);
     }
 
     public void outtake(){

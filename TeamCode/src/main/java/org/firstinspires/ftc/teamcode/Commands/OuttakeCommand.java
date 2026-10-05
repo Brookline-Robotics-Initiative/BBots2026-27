@@ -14,8 +14,10 @@ public class OuttakeCommand extends CommandBase {
 
     @Override
     public void execute(){
-        outtake.outtake();
+        outtake.setPower(1.0);
     }
     @Override
-    public void end(boolean interrupted){outtake.stop();}
+    public void end(boolean interrupted){
+//        outtake.stop();
+    }
 }
