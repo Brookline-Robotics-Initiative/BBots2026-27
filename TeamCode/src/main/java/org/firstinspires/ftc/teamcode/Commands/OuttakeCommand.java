@@ -18,6 +18,6 @@ public class OuttakeCommand extends CommandBase {
     }
     @Override
     public void end(boolean interrupted){
-//        outtake.stop();
+        outtake.stop();
     }
 }

@@ -18,4 +18,10 @@ public class ResetOuttakeCommand extends CommandBase {
     }
 
     public void end(boolean interrupted){outtake.stop();}
+
+    @Override
+    public boolean isFinished(){
+        // FIXME: finish once the reset position is reached. Otherwise, just make this a pseudo stop command.
+        return true;
+    }
 }
