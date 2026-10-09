@@ -18,12 +18,15 @@ public class Constants {
     public static final String IMU_ID = "imu";
   }
 
-    public static class IntakeConstants {
-        public static final String INTAKE_ID = "intakeMotor";
-        public static final double INTAKE_VELOCITY = 1500; //FIXME: test and change
-        public static final double EXPEL_VELOCITY = 1500; //FIXME: test and change
-        public static final double INTAKE_MAX_VELOCITY = 7000; // in RPM, 312 //FIXME: test and chance
-    }
+  public static class IntakeConstants {
+      public static final String INTAKE_ID = "intakeMotor";
+      public static final double INTAKE_VELOCITY = 1500; //FIXME: test and change
+      public static final double EXPEL_VELOCITY = 1500; //FIXME: test and change
+      public static final double INTAKE_RPM = 312;
+      public static final double INTAKE_TICKS_PER_REV = 28;
+      public static final double INTAKE_MAX_VELOCITY = INTAKE_RPM * INTAKE_TICKS_PER_REV / 60; // in RPM, 312 //FIXME: test and chance
+  }
+
   public static class SpindexerConstants {
     public static final String SPIN_ID = "spindexerMotor";
 
@@ -33,7 +36,10 @@ public class Constants {
 
   public static class OuttakeConstants {
     public static final String OUTTAKE_ID = "outtakeMotor";
-    public static final double OUTTAKE_MAX_VELOCITY =  7000;
+
+    public static final double OUTTAKE_RPM = 6000; //TODO: CHANGE
+    public static final double OUTTAKE_TICKS_PER_REV = 28;
+    public static final double OUTTAKE_MAX_VELOCITY = OUTTAKE_RPM * OUTTAKE_TICKS_PER_REV / 60; // 2800 ticks/s
 
     public static final double OUTTAKE_SPEED = 3000; //TODO!!!
     public static final int OUTTAKE_START_POSITION = 0; //TODO!!!

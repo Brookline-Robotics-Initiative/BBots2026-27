@@ -21,6 +21,7 @@ public class Outtake extends SubsystemBase {
         outtakeMotor = new MotorEx (hwMap, Constants.OuttakeConstants.OUTTAKE_ID); //TODO add motor type
         encoder = outtakeMotor.encoder;
         outtakeMotor.setRunMode(Motor.RunMode.VelocityControl);
+        outtakeMotor.setBuffer(1.0);
         //pidf = new PIDFController(0.0, 0.0, 0.0, 0.0); //TODO
     }
 
