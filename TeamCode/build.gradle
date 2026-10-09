@@ -73,7 +73,7 @@ dependencies {
     implementation 'org.solverslib:core:0.3.6' // core
     implementation 'org.solverslib:pedroPathing:0.3.6' // pedroPathing
 
-    implementation "com.acmerobotics.dashboard:dashboard:0.5.1" // FTC Dashboard
+    implementation "com.acmerobotics.slothboard:dashboard:0.3.2+0.6.0" // FTC Dashboard
 
     // Pedro Pathing
     implementation 'com.pedropathing:revhub:3.0.0'
@@ -82,11 +82,11 @@ dependencies {
     implementation 'com.github.Mallen220:TurtleTracerLib:3.0.0'
 
     // Panels Dashboard
-    implementation "com.bylazar:fullpanels:1.0.12"
-    implementation "com.bylazar:limelightproxy:1.0.4"
+    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels
 
     //Sloth
-    implementation("dev.frozenmilk.sinister:Sloth:0.3.2")
+    implementation "dev.frozenmilk.sinister:Sloth:0.3.2"
+    //implementation("dev.frozenmilk.sinister:Sloth:0.3.2")
 }
 
 spotless {
