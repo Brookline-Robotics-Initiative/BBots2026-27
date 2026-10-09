@@ -19,15 +19,15 @@ public class Intake extends SubsystemBase {
 
     public Intake(final HardwareMap hwMap, Telemetry telemetry){
         this.telemetry = telemetry;
-        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID);
+        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID, Motor.GoBILDA.BARE);//6000rpm
         intakeMotor.setRunMode(Motor.RunMode.VelocityControl); //pls need explanation
         //intakeMotor.setInverted(true); -- if needed
     }
 
     private void setVelocity(final double velocity){
-        //if (Math.abs(velocity) <= MAX_VELOCITY){
-        intakeMotor.setVelocity(velocity);
-        //}
+        if (Math.abs(velocity) <= MAX_VELOCITY){
+            intakeMotor.setVelocity(velocity);
+        }
     }
 
     public double getVelocity(){
@@ -43,6 +43,8 @@ public class Intake extends SubsystemBase {
     }
 
     public void stop(){
-        intakeMotor.stopMotor();
+        intakeMotor.setRunMode(Motor.RunMode.RawPower);
+        intakeMotor.set(0);
+        intakeMotor.setRunMode(Motor.RunMode.VelocityControl);
     }
 }
