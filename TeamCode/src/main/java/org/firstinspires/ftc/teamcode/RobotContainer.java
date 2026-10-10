@@ -113,7 +113,7 @@ RobotContainer {
     //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
-    new GamepadButton(gamepad2, GamepadKeys.Button.X).whenPressed(new InstantCommand(() -> outtake.stop()));
+    new GamepadButton(gamepad2, GamepadKeys.Button.X).whenPressed(new InstantCommand(outtake::stop, outtake));
     // Gamepad 2 buttons
     //new GamepadButton(gamepad1, GamepadKeys.Button.B).whenHeld(new IntakeCommand(intake));
     //new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenHeld(new ExpelIntakeCommand(intake));
