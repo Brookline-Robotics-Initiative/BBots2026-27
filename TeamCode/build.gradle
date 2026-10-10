@@ -82,8 +82,10 @@ dependencies {
     implementation 'com.github.Mallen220:TurtleTracerLib:3.0.0'
 
     // Panels Dashboard
-    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels
-
+//    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels
+    implementation("com.bylazar.sloth:fullpanels:0.3.2+1.0.13") {
+        exclude group: "com.bylazar.sloth", module: "limelightproxy"
+    }
     //Sloth
     implementation "dev.frozenmilk.sinister:Sloth:0.3.2"
     //implementation("dev.frozenmilk.sinister:Sloth:0.3.2")
