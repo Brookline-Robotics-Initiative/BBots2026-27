@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
+import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
 import org.firstinspires.ftc.teamcode.Constants;
@@ -13,7 +14,7 @@ public class Spindexer extends SubsystemBase {
     private final double MIN_VELOCITY = 1;
 
     public Spindexer(final HardwareMap hwMap){
-        spindexer = new MotorEx(hwMap, Constants.SpindexerConstants.SPIN_ID);
+        spindexer = new MotorEx(hwMap, Constants.SpindexerConstants.SPIN_ID); //TODO: add motor type
         spindexer.setRunMode(MotorEx.RunMode.VelocityControl);
     }
 
@@ -34,7 +35,9 @@ public class Spindexer extends SubsystemBase {
     }
 
     public void stop(){
-        spindexer.stopMotor();
+        spindexer.setRunMode(Motor.RunMode.RawPower);
+        spindexer.set(0);
+        spindexer.setRunMode(Motor.RunMode.VelocityControl);
     }
 
 }

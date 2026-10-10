@@ -11,16 +11,18 @@ import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.hardware.RevIMU;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
+import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotContainer;
 
 public class Drivetrain extends SubsystemBase {
   // Declare our motors
-  private final Motor frontLeftMotor;
-  private final Motor backLeftMotor;
-  private final Motor frontRightMotor;
-  private final Motor backRightMotor;
+  private final MotorEx frontLeftMotor;
+  private final MotorEx backLeftMotor;
+  private final MotorEx frontRightMotor;
+  private final MotorEx backRightMotor;
 
   private final Follower follower;
 
@@ -39,10 +41,10 @@ public class Drivetrain extends SubsystemBase {
     this.hwMap = hwMap;
     this.telemetry = telemetry;
 
-    frontLeftMotor = new Motor(hwMap, Constants.DriveConstants.FRONT_LEFT_MOTOR_ID);
-    backLeftMotor = new Motor(hwMap, Constants.DriveConstants.BACK_LEFT_MOTOR_ID);
-    frontRightMotor = new Motor(hwMap, Constants.DriveConstants.FRONT_RIGHT_MOTOR_ID);
-    backRightMotor = new Motor(hwMap, Constants.DriveConstants.BACK_RIGHT_MOTOR_ID);
+    frontLeftMotor = new MotorEx(hwMap, Constants.DriveConstants.FRONT_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    backLeftMotor = new MotorEx(hwMap, Constants.DriveConstants.BACK_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    frontRightMotor = new MotorEx(hwMap, Constants.DriveConstants.FRONT_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    backRightMotor = new MotorEx(hwMap, Constants.DriveConstants.BACK_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
 
     frontLeftMotor.setInverted(false);
     backLeftMotor.setInverted(false);
@@ -94,8 +96,18 @@ public class Drivetrain extends SubsystemBase {
     backRightMotor.set(br);
   }
 
+  public void setRunMode(Motor.RunMode runMode){
+    frontLeftMotor.setRunMode(runMode);
+    backLeftMotor.setRunMode(runMode);
+    frontRightMotor.setRunMode(runMode);
+    backRightMotor.setRunMode(runMode);
+  }
+
   public void stopMotors() { // Stops all motors
-    drive.stop();
+    setRunMode(Motor.RunMode.RawPower);
+    setSpeeds(0,0,0,0);
+    setRunMode(Motor.RunMode.VelocityControl);
+    ;
   }
 
   public void driveRobotCentric(final GamepadEx Controller) {
