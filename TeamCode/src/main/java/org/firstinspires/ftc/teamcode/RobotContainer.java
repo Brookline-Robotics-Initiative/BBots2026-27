@@ -105,6 +105,8 @@ public class RobotContainer {
     // Gamepad 2 buttons
     new GamepadButton(gamepad1, GamepadKeys.Button.B).whenPressed(new IntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.A)
+            .whenPressed(new InstantCommand(() -> intake.stop(), intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {

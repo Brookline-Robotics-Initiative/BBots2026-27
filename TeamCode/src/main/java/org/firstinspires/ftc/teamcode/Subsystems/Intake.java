@@ -19,7 +19,7 @@ public class Intake extends SubsystemBase {
 
     public Intake(final HardwareMap hwMap, Telemetry telemetry){
         this.telemetry = telemetry;
-        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID, Motor.GoBILDA.BARE);//6000rpm
+        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID, Constants.IntakeConstants.INTAKE_MOTOR_TYPE);//6000rpm
         intakeMotor.setRunMode(Motor.RunMode.VelocityControl); //pls need explanation
         //intakeMotor.setInverted(true); -- if needed
     }

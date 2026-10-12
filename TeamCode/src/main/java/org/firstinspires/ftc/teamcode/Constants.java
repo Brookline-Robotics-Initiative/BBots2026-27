@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.seattlesolvers.solverslib.hardware.motors.Motor;
+
 public class Constants {
 
   public static class RobotConstants {
@@ -19,10 +21,12 @@ public class Constants {
   }
 
     public static class IntakeConstants {
+        public static final Motor.GoBILDA INTAKE_MOTOR_TYPE = Motor.GoBILDA.BARE;
         public static final String INTAKE_ID = "intakeMotor";
-        public static final double INTAKE_VELOCITY = 140; //FIXME: test and change
-        public static final double EXPEL_VELOCITY = 140; //FIXME: test and change
-        public static final double INTAKE_MAX_VELOCITY = 300; // in RPM, 312 //FIXME: test and chance
+        public static final double INTAKE_MAX_VELOCITY = INTAKE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); //2800 aka 6000 rpm
+        public static final double INTAKE_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; //560 aka 1200 rpm
+        public static final double EXPEL_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; //560 aka 1200 rpm
+
     }
   public static class SpindexerConstants {
     public static final String SPIN_ID = "spindexerMotor";
