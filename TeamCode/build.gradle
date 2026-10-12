@@ -76,8 +76,9 @@ dependencies {
 
     implementation "dev.frozenmilk.sinister:Sloth:0.3.2"
     implementation "com.acmerobotics.slothboard:dashboard:0.3.2+0.6.0" // FTC Dashboard
-    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels (includes limelightproxy)
-
+    implementation("com.bylazar.sloth:fullpanels:0.3.2+1.0.13") {
+        exclude group: "com.bylazar.sloth", module: "limelightproxy"
+    }
     // Pedro Pathing
     implementation 'com.pedropathing:revhub:3.0.0'
     implementation 'com.pedropathing:tuning:1.0.0' // AutoTune (see Tuning.java)
