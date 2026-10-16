@@ -1,0 +1,231 @@
+{
+  "startPoint": {
+    "x": 60,
+    "y": 9.601645123384262,
+    "heading": "constant",
+    "degrees": 0,
+    "locked": false
+  },
+  "lines": [
+    {
+      "id": "line-mvbfybmy-6aay80",
+      "name": "DriveToShoot",
+      "endPoint": {
+        "x": 60,
+        "y": 34.475910693302,
+        "heading": "linear",
+        "startDeg": 90,
+        "endDeg": 90
+      },
+      "controlPoints": [],
+      "color": "#8CD6B8",
+      "eventMarkers": [],
+      "locked": false,
+      "waitBeforeMs": 0,
+      "waitAfterMs": 0,
+      "waitBeforeName": "",
+      "waitAfterName": "",
+      "hidden": false
+    },
+    {
+      "id": "mvbh9bm5-itd5kf",
+      "name": "IntakeGarden",
+      "endPoint": {
+        "x": 10.75,
+        "y": 13.057445785706658,
+        "heading": "linear",
+        "startDeg": -90,
+        "endDeg": -90
+      },
+      "controlPoints": [
+        {
+          "x": 10.75,
+          "y": 42.372502937720334
+        }
+      ],
+      "color": "#BD5C86",
+      "eventMarkers": [],
+      "waitBeforeMs": 0,
+      "waitAfterMs": 0,
+      "waitBeforeName": "",
+      "waitAfterName": ""
+    },
+    {
+      "id": "mvbiqg2m-jzltho",
+      "name": "GardenBackUp",
+      "endPoint": {
+        "x": 10.75,
+        "y": 34.475910693302,
+        "heading": "linear",
+        "reverse": false,
+        "startDeg": -90,
+        "endDeg": -90
+      },
+      "controlPoints": [],
+      "color": "#766BCD",
+      "eventMarkers": [],
+      "waitBeforeMs": 0,
+      "waitAfterMs": 0,
+      "waitBeforeName": "",
+      "waitAfterName": ""
+    },
+    {
+      "id": "mvbhqc6q-veujdx",
+      "name": "GardenToShoot",
+      "endPoint": {
+        "x": 60,
+        "y": 34.475910693302,
+        "heading": "linear",
+        "startDeg": -90,
+        "endDeg": 90,
+        "targetX": 59.21504112808461,
+        "targetY": 62.223266745005915,
+        "segments": [
+          {
+            "tStart": 0,
+            "tEnd": 0.2,
+            "heading": "linear",
+            "reverse": false,
+            "startDeg": -90,
+            "endDeg": -90
+          },
+          {
+            "tStart": 0.2,
+            "tEnd": 1,
+            "heading": "linear",
+            "reverse": false,
+            "targetX": 59.45835349415912,
+            "targetY": 61.05094352664685,
+            "startDeg": -45,
+            "endDeg": 90
+          }
+        ]
+      },
+      "controlPoints": [],
+      "color": "#CB5CBB",
+      "eventMarkers": [],
+      "waitBeforeMs": 0,
+      "waitAfterMs": 0,
+      "waitBeforeName": "",
+      "waitAfterName": ""
+    },
+    {
+      "id": "mvbhuftl-c8oopz",
+      "name": "ShootToPark",
+      "endPoint": {
+        "x": 13.570211515863692,
+        "y": 104.43948296122205,
+        "heading": "tangential",
+        "reverse": false
+      },
+      "controlPoints": [
+        {
+          "x": 9.116333725029385,
+          "y": 29.426556991774383
+        }
+      ],
+      "color": "#6C55B9",
+      "eventMarkers": [],
+      "waitBeforeMs": 0,
+      "waitAfterMs": 0,
+      "waitBeforeName": "",
+      "waitAfterName": ""
+    }
+  ],
+  "shapes": [
+    {
+      "id": "biobuzz-hive-red",
+      "name": "HiveRedSide",
+      "vertices": [
+        {
+          "x": 46.5,
+          "y": 92
+        },
+        {
+          "x": 46.5,
+          "y": 52
+        },
+        {
+          "x": 49,
+          "y": 52
+        },
+        {
+          "x": 49,
+          "y": 92
+        }
+      ],
+      "color": "#3f3f3f",
+      "fillColor": "#fca5a5",
+      "type": "obstacle"
+    },
+    {
+      "id": "biobuzz-hive-blue",
+      "name": "HiveBlueSide",
+      "vertices": [
+        {
+          "x": 95,
+          "y": 92
+        },
+        {
+          "x": 95,
+          "y": 52
+        },
+        {
+          "x": 97.5,
+          "y": 52
+        },
+        {
+          "x": 97.5,
+          "y": 92
+        }
+      ],
+      "color": "#3f3f3f",
+      "fillColor": "#fca5a5",
+      "type": "obstacle"
+    }
+  ],
+  "sequence": [
+    {
+      "kind": "path",
+      "lineId": "line-mvbfybmy-6aay80"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbgdo7h-2mtag6",
+      "name": "ShootWait",
+      "durationMs": 4000,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbh9bm5-itd5kf"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbhaexh-mz70bb",
+      "name": "GardenWait",
+      "durationMs": 500,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbiqg2m-jzltho"
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbhqc6q-veujdx"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbht9fb-fxiya5",
+      "name": "Shoot",
+      "durationMs": 2000,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbhuftl-c8oopz"
+    }
+  ],
+  "extraData": {}
+}
