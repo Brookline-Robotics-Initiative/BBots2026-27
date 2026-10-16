@@ -10,10 +10,14 @@ public class Alliance {
 
     private static alliance currAlliance = null;
 
-    public void setAlliance(alliance inputAlliance){
+    public static void setAlliance(alliance inputAlliance){
         if(inputAlliance != null){
             currAlliance = inputAlliance;
         }
+    }
+
+    public static alliance getAlliance(){
+        return currAlliance;
     }
 
 

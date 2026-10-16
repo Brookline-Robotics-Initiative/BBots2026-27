@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Commands.AutoCommands;
 
+
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.RobotContainer;
 import org.firstinspires.ftc.teamcode.RobotContainer.AutoMode;
 
@@ -47,6 +49,12 @@ public class AutoChooser extends CommandBase {
         selected = modes[selectedIndex];
         lastButtonPressTime = currentTime;
         updateTelemetry();
+      } else if (gamepad.isDown(GamepadKeys.Button.DPAD_UP)){
+        Alliance.setAlliance(Alliance.alliance.RedAlliance);
+        updateTelemetry();
+      } else if (gamepad.isDown(GamepadKeys.Button.DPAD_DOWN)){
+        Alliance.setAlliance(Alliance.alliance.BlueAlliance);
+        updateTelemetry();
       }
     }
 
@@ -59,8 +67,10 @@ public class AutoChooser extends CommandBase {
   private void updateTelemetry() {
     telemetry.clear();
     telemetry.addLine("=== AUTONOMOUS SELECTION ===");
-    telemetry.addLine("Use D-Pad Left/Right to choose");
+    telemetry.addLine("Use D-Pad Left/Right to choose. Use UP for red, DOWN for blue alliance");
+    telemetry.addData("Current Alliance: ", Alliance.getAlliance());
     telemetry.addLine("");
+
 
     for (int i = 0; i < modes.length; i++) {
       if (i == selectedIndex) {

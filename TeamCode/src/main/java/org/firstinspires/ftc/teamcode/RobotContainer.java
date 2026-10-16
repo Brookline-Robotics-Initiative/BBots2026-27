@@ -43,11 +43,6 @@ public class RobotContainer {
     TeleOp
   }
 
-  public enum Alliance{
-    RedAlliance,
-    BlueAlliance
-  }
-
   private gameMode currentGameMode = null;
 
   public enum AutoMode { // Enum of all valid autonomous modes
@@ -56,7 +51,6 @@ public class RobotContainer {
   }
 
   private AutoMode currentAuto;
-  private Alliance alliance;
 
   public RobotContainer(
       final HardwareMap hardwareMap,
