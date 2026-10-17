@@ -82,7 +82,7 @@ dependencies {
     implementation 'com.github.Mallen220:TurtleTracerLib:3.0.0'
 
     // Panels Dashboard
-//    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels
+    //    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels
     implementation("com.bylazar.sloth:fullpanels:0.3.2+1.0.13") {
         exclude group: "com.bylazar.sloth", module: "limelightproxy"
     }
@@ -98,7 +98,7 @@ spotless {
             exclude '**/build/**', '**/build-*/**', '**/BuildConstants.java', '**/generated-sources/**'
         }
         toggleOffOn()
-        googleJavaFormat()
+        googleJavaFormat('1.28.0')
         removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
