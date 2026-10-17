@@ -7,7 +7,29 @@
             "default": true
         }
     ],
-    "java.import.gradle.enabled": true,
+    "java.import.gradle.enabled": false,
     "java.import.gradle.wrapper.enabled": true,
-    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home"
+    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+    "java.import.maven.enabled": false,
+    "java.jdt.ls.androidSupport.enabled": "off",
+    "java.gradle.buildServer.enabled": "off",
+    "editor.formatOnSave": true,
+    "[java]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "[groovy]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "spotlessGradle.format.enable": true,
+    "spotlessGradle.diagnostics.enable": true
 }
