@@ -22,71 +22,53 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * #createFollower} to match.
  */
 public class Constants {
-  public static MecanumConfig drivetrainConfig =
-      new MecanumConfig(
-          c -> {
-            c.frontLeftName.set("lf");
-            c.backLeftName.set("lr");
-            c.frontRightName.set("rf");
-            c.backRightName.set("rr");
+    public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
+        c.frontLeftName.set("frontLeftMotor");
+        c.frontRightName.set("frontRightMotor");
+        c.backLeftName.set("backLeftMotor");
+        c.backRightName.set("backRightMotor");
+        c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    });
 
-            c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-            c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-            c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
-            c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
+        c.name.set("pinpoint");
+        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD);
+        c.xPodOffset.set(-5.039054690383551);
+        c.yPodOffset.set(-3.465088671586645);
+        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.globalDistanceUnit.set(DistanceUnit.INCH);
+        c.offsetUnits.set(DistanceUnit.INCH);
+    });
 
-            c.powerThreshold.set(0.01);
-            c.manualBrakeMode.set(false);
-          });
+    public static ForesightConfig foresightConfig = new ForesightConfig(
+            c -> {
+                Controller primaryTranslationalForward = Controller.proportional(0.6918084646366569);
+                Controller secondaryTranslationalForward = Controller.proportional(0.25560474222061796);
+                Controller primaryTranslationalLateral = Controller.proportional(1.306824012460313);
+                Controller secondaryTranslationalLateral = Controller.proportional(0.48283655362336064);
 
-  public static PinpointConfig localizerConfig =
-      new PinpointConfig(
-          c -> {
-            c.name.set("pinpoint");
-            c.xPodOffset.set(-5.0);
-            c.yPodOffset.set(0.5);
-            c.offsetUnits.set(DistanceUnit.INCH);
-            c.globalDistanceUnit.set(DistanceUnit.INCH);
-            c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-            c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.REVERSED);
-            c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-          });
+                c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
+                c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
 
-  public static ForesightConfig foresightConfig =
-      new ForesightConfig(
-          c -> {
-            // The end constraints (timeoutConstraint etc.) that decide when FollowPathCommand and
-            // HoldPointCommand finish
-            // also go here, see https://pedropathing.com/docs/pathing/reference/endconstraints
+                c.coast.set(Controller.proportionalFeedforward(0.016377658886732496));
+                c.brake.set(Controller.proportionalFeedforward(0.013921010053722621));
 
-            Controller primaryTranslationalForward = Controller.proportional(0.3);
-            Controller secondaryTranslationalForward = Controller.proportional(0.1);
-            Controller primaryTranslationalLateral = Controller.proportional(0.3);
-            Controller secondaryTranslationalLateral = Controller.proportional(0.1);
+                c.headingFeedback.set(Controller.proportional(4.279777681405689));
+                c.headingBrakeCoefficients.set(Vector2D.cartesian(0.043922941316168515, 0.005377696636793645));
 
-            c.forwardTranslational.set(
-                Controller.piecewise(secondaryTranslationalForward)
-                    .put(2.5, primaryTranslationalForward));
-            c.strafeTranslational.set(
-                Controller.piecewise(secondaryTranslationalLateral)
-                    .put(2.5, primaryTranslationalLateral));
+                c.linearBrakeCoefficients.set(Matrix.diag(0.0450653162639568, 0.04401223598329838));
+                c.quadraticBrakeCoefficients.set(Matrix.diag(0.002017859860966682, 0.0016049569428496324));
 
-            c.coast.set(Controller.proportionalFeedforward(0.010978350889324107));
-            c.brake.set(Controller.proportionalFeedforward(0.008731598255925491));
-
-            c.headingFeedback.set(Controller.proportional(5.258721785960744));
-            c.headingBrakeCoefficients.set(
-                Vector2D.cartesian(0.05642143125655298, 0.0063829525363003695));
-
-            c.linearBrakeCoefficients.set(Matrix.diag(0.10605894992901523, 0.08719146175596092));
-            c.quadraticBrakeCoefficients.set(
-                Matrix.diag(0.0014663966976606565, 0.0013837064502458813));
-
-            c.maxAchievableForwardVelocity.set(72.72923108818539);
-            c.maxAchievableStrafeVelocity.set(52.34323936525474);
-            c.naturalForwardDeceleration.set(85.01144677379789);
-            c.naturalStrafeDeceleration.set(104.49787535782846);
-          });
+                c.maxAchievableForwardVelocity.set(62.6321833988067);
+                c.maxAchievableStrafeVelocity.set(55.24797429320508);
+                c.naturalForwardDeceleration.set(43.19459872999997);
+                c.naturalStrafeDeceleration.set(51.59615090010216);
+            }
+    );
 
   public static Follower createFollower(HardwareMap hardwareMap) {
     return new Follower(
