@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.CommandScheduler;
 
-@TeleOp(name = "Main TeleeOp 2025-26")
+@TeleOp(name = "Main TeleeOp 2026-27")
 public class TeleOpMain extends CommandOpMode {
   private RobotContainer robotContainer;
 

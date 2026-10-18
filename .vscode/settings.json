@@ -31,5 +31,6 @@
         "editor.formatOnSave": true
     },
     "spotlessGradle.format.enable": true,
-    "spotlessGradle.diagnostics.enable": true
+    "spotlessGradle.diagnostics.enable": true,
+    "r.lsp.promptToInstall": false
 }
