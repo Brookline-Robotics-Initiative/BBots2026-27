@@ -20,18 +20,19 @@ public class Constants {
     public static final String IMU_ID = "imu";
   }
 
-    public static class IntakeConstants {
-        public static final Motor.GoBILDA INTAKE_MOTOR_TYPE = Motor.GoBILDA.BARE;
-        public static final String INTAKE_ID = "intakeMotor";
-        public static final double INTAKE_MAX_VELOCITY = INTAKE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); //2800 aka 6000 rpm
-        public static final double INTAKE_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; //560 aka 1200 rpm
-        public static final double EXPEL_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; //560 aka 1200 rpm
+  public static class IntakeConstants {
+    public static final Motor.GoBILDA INTAKE_MOTOR_TYPE = Motor.GoBILDA.BARE;
+    public static final String INTAKE_ID = "intakeMotor";
+    public static final double INTAKE_MAX_VELOCITY =
+        INTAKE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); // 2800 aka 6000 rpm
+    public static final double INTAKE_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; // 560 aka 1200 rpm
+    public static final double EXPEL_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; // 560 aka 1200 rpm
+  }
 
-    }
   public static class SpindexerConstants {
     public static final String SPIN_ID = "spindexerMotor";
 
-    public static final double SPIN_VELOCITY = 1000; //TODO: Change
-    public static final double SPIN_MAX_VELOCITY = 7000; //rpm
+    public static final double SPIN_VELOCITY = 1000; // TODO: Change
+    public static final double SPIN_MAX_VELOCITY = 7000; // rpm
   }
 }
