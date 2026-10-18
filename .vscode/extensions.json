@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "vscjava.vscode-java-pack",
-        "naco-siren.gradle-language"
+        "naco-siren.gradle-language",
+        "richardwillis.vscode-spotless-gradle"
     ]
 }

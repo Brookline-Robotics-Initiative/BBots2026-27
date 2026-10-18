@@ -5,16 +5,19 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
 
 public class Intake extends SubsystemBase {
     private final MotorEx intakeMotor;
+    private Telemetry telemetry;
 
     private final double MAX_VELOCITY = Constants.IntakeConstants.INTAKE_MAX_VELOCITY;
     private final double MIN_VELOCITY = 0; //why is it 1 and not 0?
 
-    public Intake(final HardwareMap hwMap){
-        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID);
+    public Intake(final HardwareMap hwMap, Telemetry telemetry){
+        this.telemetry = telemetry;
+        intakeMotor = new MotorEx(hwMap, Constants.IntakeConstants.INTAKE_ID, Constants.IntakeConstants.INTAKE_MOTOR_TYPE);//6000rpm
         intakeMotor.setRunMode(Motor.RunMode.VelocityControl); //pls need explanation
         //intakeMotor.setInverted(true); -- if needed
     }
@@ -38,6 +41,8 @@ public class Intake extends SubsystemBase {
     }
 
     public void stop(){
-        intakeMotor.stopMotor();
+        intakeMotor.setRunMode(Motor.RunMode.RawPower);
+        intakeMotor.set(0);
+        intakeMotor.setRunMode(Motor.RunMode.VelocityControl);
     }
 }

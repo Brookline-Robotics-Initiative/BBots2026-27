@@ -78,11 +78,11 @@ RobotContainer {
   public void initializeSubsystems() {
     //    pinpoint = new PinpointLocalizer(hardwareMap, new PinpointConfig()); FIXME: This isn't
     // being implemented
-    //drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
-    //autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
-    //intake = new Intake(hardwareMap);
-    //spindexer = new Spindexer(hardwareMap);
+    drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    intake = new Intake(hardwareMap, telemetry);
     outtake = new Outtake(hardwareMap);
+    //spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(outtake);
   }
@@ -109,14 +109,17 @@ RobotContainer {
 
   private void configureButtonBindings() {
     // Gamepad 1 buttons
-   // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
+    //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
     //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
+    // Gamepad 1 buttons
+    new GamepadButton(gamepad1, GamepadKeys.Button.B).whenPressed(new IntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.A)
+            .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+    // Gamepad 2 buttons
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.X).whenPressed(new InstantCommand(outtake::stop, outtake));
-    // Gamepad 2 buttons
-    //new GamepadButton(gamepad1, GamepadKeys.Button.B).whenHeld(new IntakeCommand(intake));
-    //new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenHeld(new ExpelIntakeCommand(intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
