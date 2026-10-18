@@ -19,12 +19,11 @@ public class Constants {
   }
 
   public static class IntakeConstants {
-      public static final String INTAKE_ID = "intakeMotor";
-      public static final double INTAKE_VELOCITY = 1500; //FIXME: test and change
-      public static final double EXPEL_VELOCITY = 1500; //FIXME: test and change
-      public static final double INTAKE_RPM = 312;
-      public static final double INTAKE_TICKS_PER_REV = 28;
-      public static final double INTAKE_MAX_VELOCITY = INTAKE_RPM * INTAKE_TICKS_PER_REV / 60; // in RPM, 312 //FIXME: test and chance
+
+    public static final String INTAKE_ID = "intakeMotor";
+    public static final double INTAKE_VELOCITY = 1500; //FIXME: test and change
+    public static final double EXPEL_VELOCITY = 1500; //FIXME: test and change
+    public static final double INTAKE_MAX_VELOCITY = 7000; // in RPM, 312 //
   }
 
   public static class SpindexerConstants {
