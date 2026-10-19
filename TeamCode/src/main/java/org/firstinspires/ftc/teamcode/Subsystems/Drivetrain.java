@@ -12,7 +12,6 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.hardware.RevIMU;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotContainer;
@@ -41,10 +40,14 @@ public class Drivetrain extends SubsystemBase {
     this.hwMap = hwMap;
     this.telemetry = telemetry;
 
-    frontLeftMotor = new MotorEx(hwMap, Constants.DriveConstants.FRONT_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
-    backLeftMotor = new MotorEx(hwMap, Constants.DriveConstants.BACK_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
-    frontRightMotor = new MotorEx(hwMap, Constants.DriveConstants.FRONT_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
-    backRightMotor = new MotorEx(hwMap, Constants.DriveConstants.BACK_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    frontLeftMotor =
+        new MotorEx(hwMap, Constants.DriveConstants.FRONT_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    backLeftMotor =
+        new MotorEx(hwMap, Constants.DriveConstants.BACK_LEFT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    frontRightMotor =
+        new MotorEx(hwMap, Constants.DriveConstants.FRONT_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
+    backRightMotor =
+        new MotorEx(hwMap, Constants.DriveConstants.BACK_RIGHT_MOTOR_ID, Motor.GoBILDA.RPM_312);
 
     frontLeftMotor.setInverted(false);
     backLeftMotor.setInverted(false);
@@ -96,7 +99,7 @@ public class Drivetrain extends SubsystemBase {
     backRightMotor.set(br);
   }
 
-  public void setRunMode(Motor.RunMode runMode){
+  public void setRunMode(Motor.RunMode runMode) {
     frontLeftMotor.setRunMode(runMode);
     backLeftMotor.setRunMode(runMode);
     frontRightMotor.setRunMode(runMode);
@@ -105,7 +108,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void stopMotors() { // Stops all motors
     setRunMode(Motor.RunMode.RawPower);
-    setSpeeds(0,0,0,0);
+    setSpeeds(0, 0, 0, 0);
     setRunMode(Motor.RunMode.VelocityControl);
     ;
   }
