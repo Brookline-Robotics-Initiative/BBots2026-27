@@ -10,15 +10,16 @@ import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.turtletracerlib.pathing.NamedCommands;
+import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.hive1;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBase;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Commands.SpindexerAgitateCommand;
-import org.firstinspires.ftc.teamcode.Commands.SpindexerOutCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
-import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
 
 public class RobotContainer {
@@ -37,7 +38,6 @@ public class RobotContainer {
   private final GamepadEx gamepad2;
   private final CommandOpMode JavaBot;
 
-
   public enum gameMode {
     Auto,
     TeleOp
@@ -47,7 +47,9 @@ public class RobotContainer {
 
   public enum AutoMode { // Enum of all valid autonomous modes
     ExampleAuto,
-    DoNothingAuto;
+    DoNothingAuto,
+    hive1,
+    leaveBase;
   }
 
   private AutoMode currentAuto;
@@ -75,7 +77,7 @@ public class RobotContainer {
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     intake = new Intake(hardwareMap, telemetry);
-    //spindexer = new Spindexer(hardwareMap);
+    // spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(drive, autoDrive, intake);
   }
@@ -101,13 +103,15 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Gamepad 1 buttons
-    //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
-    //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
+    // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new
+    // SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
+    // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new
+    // SpindexerAgitateCommand(spindexer));
     // Gamepad 2 buttons
     new GamepadButton(gamepad1, GamepadKeys.Button.B).whenPressed(new IntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
-            .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+        .whenPressed(new InstantCommand(() -> intake.stop(), intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
@@ -117,10 +121,16 @@ public class RobotContainer {
     try {
       if (selectedAutoMode == AutoMode.DoNothingAuto) {
         CommandScheduler.getInstance().schedule(new InstantCommand());
+      } else if (selectedAutoMode == AutoMode.hive1) {
+        CommandScheduler.getInstance()
+            .schedule(new hive1(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBase) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBase(autoDrive.getFollower(), hardwareMap, telemetry));
       } else if (Math.random() > 0.5) {
         System.out.println("FIXME: Update this part");
       }
-    } catch (final Error error) {
+    } catch (final IOException error) {
       telemetry.addLine("A critical IOException error has occurred. Doing nothing. ");
       telemetry.addLine(error.toString());
       telemetry.update();

@@ -1,10 +1,17 @@
 {
+  "version": "2.5.1",
+  "header": {
+    "info": "Created with Turtle Tracer",
+    "copyright": "Copyright 2026 Matthew Allen. Licensed under the Modified Apache License, Version 2.0.",
+    "link": "https://github.com/Mallen220/TurtleTracer"
+  },
   "startPoint": {
     "x": 60,
     "y": 9.601645123384262,
-    "heading": "constant",
-    "degrees": 0,
-    "locked": false
+    "heading": "linear",
+    "locked": false,
+    "startDeg": 90,
+    "endDeg": 86.60206355527998
   },
   "lines": [
     {
@@ -48,7 +55,8 @@
       "waitBeforeMs": 0,
       "waitAfterMs": 0,
       "waitBeforeName": "",
-      "waitAfterName": ""
+      "waitAfterName": "",
+      "hidden": false
     },
     {
       "id": "mvbiqg2m-jzltho",
@@ -67,7 +75,8 @@
       "waitBeforeMs": 0,
       "waitAfterMs": 0,
       "waitBeforeName": "",
-      "waitAfterName": ""
+      "waitAfterName": "",
+      "hidden": false
     },
     {
       "id": "mvbhqc6q-veujdx",
@@ -107,7 +116,8 @@
       "waitBeforeMs": 0,
       "waitAfterMs": 0,
       "waitBeforeName": "",
-      "waitAfterName": ""
+      "waitAfterName": "",
+      "hidden": false
     },
     {
       "id": "mvbhuftl-c8oopz",
@@ -129,7 +139,51 @@
       "waitBeforeMs": 0,
       "waitAfterMs": 0,
       "waitBeforeName": "",
-      "waitAfterName": ""
+      "waitAfterName": "",
+      "hidden": false
+    }
+  ],
+  "sequence": [
+    {
+      "kind": "path",
+      "lineId": "line-mvbfybmy-6aay80"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbgdo7h-2mtag6",
+      "name": "ShootWait",
+      "durationMs": 4000,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbh9bm5-itd5kf"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbhaexh-mz70bb",
+      "name": "GardenWait",
+      "durationMs": 500,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbiqg2m-jzltho"
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbhqc6q-veujdx"
+    },
+    {
+      "kind": "wait",
+      "id": "mvbht9fb-fxiya5",
+      "name": "Shoot",
+      "durationMs": 2000,
+      "locked": false
+    },
+    {
+      "kind": "path",
+      "lineId": "mvbhuftl-c8oopz"
     }
   ],
   "shapes": [
@@ -182,49 +236,6 @@
       "color": "#3f3f3f",
       "fillColor": "#fca5a5",
       "type": "obstacle"
-    }
-  ],
-  "sequence": [
-    {
-      "kind": "path",
-      "lineId": "line-mvbfybmy-6aay80"
-    },
-    {
-      "kind": "wait",
-      "id": "mvbgdo7h-2mtag6",
-      "name": "ShootWait",
-      "durationMs": 4000,
-      "locked": false
-    },
-    {
-      "kind": "path",
-      "lineId": "mvbh9bm5-itd5kf"
-    },
-    {
-      "kind": "wait",
-      "id": "mvbhaexh-mz70bb",
-      "name": "GardenWait",
-      "durationMs": 500,
-      "locked": false
-    },
-    {
-      "kind": "path",
-      "lineId": "mvbiqg2m-jzltho"
-    },
-    {
-      "kind": "path",
-      "lineId": "mvbhqc6q-veujdx"
-    },
-    {
-      "kind": "wait",
-      "id": "mvbht9fb-fxiya5",
-      "name": "Shoot",
-      "durationMs": 2000,
-      "locked": false
-    },
-    {
-      "kind": "path",
-      "lineId": "mvbhuftl-c8oopz"
     }
   ],
   "extraData": {}
