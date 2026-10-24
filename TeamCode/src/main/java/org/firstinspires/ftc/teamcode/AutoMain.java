@@ -35,4 +35,9 @@ public class AutoMain extends CommandOpMode {
     //      telemetry.addData("Scheduled Commands", CommandScheduler.getInstance().);
     telemetry.update();
   }
+
+  @Override
+  public void end() {
+    robotContainer.stopLiveView();
+  }
 }
