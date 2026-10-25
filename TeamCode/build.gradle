@@ -84,7 +84,7 @@ dependencies {
     implementation 'com.pedropathing:revhub:3.0.2'
     implementation 'com.pedropathing:tuning:1.0.1' // AutoTune (see Tuning.java)
 
-    implementation 'com.github.Mallen220:TurtleTracerLib:3.0.3'
+    implementation 'com.github.Mallen220:TurtleTracerLib:3.0.4'
 
     // Panels Dashboard
     //    implementation "com.bylazar.sloth:fullpanels:0.3.2+1.0.13" // Panels

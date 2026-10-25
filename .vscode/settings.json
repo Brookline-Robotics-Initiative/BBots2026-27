@@ -15,8 +15,7 @@
     "java.gradle.buildServer.enabled": "off",
     "editor.formatOnSave": true,
     "[java]": {
-        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[groovy]": {
         "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
