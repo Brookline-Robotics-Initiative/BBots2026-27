@@ -96,10 +96,6 @@ public class RobotContainer {
     currentGameMode = gameMode.Auto;
     initializeSubsystems();
     registerNamedCommands();
-    
-    TurtleTracerLiveView.getInstance().start();
-    
-    TurtleTracerLiveView.getInstance().setFollower(autoDrive.getFollower());
 
     // Schedule Auto Chooser
     CommandScheduler.getInstance().schedule(new AutoChooser(this, gamepad1, telemetry));
@@ -164,10 +160,6 @@ public class RobotContainer {
             telemetry.addData("Heading: ", autoDrive.getFollower().getPose().getHeading());
       */
 
-    }
-    public void stopLiveView() {
-    // Disable Live View when the OpMode stops to prevent memory leaks
-    TurtleTracerLiveView.getInstance().disable();
     }
   }
 }
