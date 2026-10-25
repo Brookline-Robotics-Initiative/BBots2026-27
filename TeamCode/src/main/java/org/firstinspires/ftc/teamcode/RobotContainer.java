@@ -79,7 +79,11 @@ public class RobotContainer {
     intake = new Intake(hardwareMap, telemetry);
     // spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(drive, autoDrive, intake);
+    CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
+    // 1. Start the Live View server
+    TurtleTracerLiveView.getInstance().start();
+    // 2. Link the Follower so Live View can read the pose
+    TurtleTracerLiveView.getInstance().setFollower(follower);
   }
 
   public void configureTeleOp() {
