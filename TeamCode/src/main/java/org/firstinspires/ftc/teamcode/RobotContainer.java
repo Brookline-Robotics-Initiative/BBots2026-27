@@ -147,6 +147,11 @@ public class RobotContainer {
     // Register  commands
     // NamedCommands.registerCommand(
     // "IntakeOn", new InstantCommand(() -> intake.intake()), "Turn intake on (intake mode)");
+    NamedCommands.registerCommand(
+        "IntakeCommand", () -> CommandScheduler.getInstance().schedule(new IntakeCommand(intake)));
+    NamedCommands.registerCommand(
+        "OuttakeCommand",
+        () -> CommandScheduler.getInstance().schedule(new OuttakeCommand(outtake)));
     NamedCommands.listAllCommands(telemetry);
   }
 
