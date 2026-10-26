@@ -9,6 +9,7 @@ import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
+import com.turtletracerlib.TurtleTracerLiveView;
 import com.turtletracerlib.pathing.NamedCommands;
 import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -80,10 +81,6 @@ public class RobotContainer {
     // spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(intake, spindexer, drive, autoDrive);
-    // 1. Start the Live View server
-    TurtleTracerLiveView.getInstance().start();
-    // 2. Link the Follower so Live View can read the pose
-    TurtleTracerLiveView.getInstance().setFollower(follower);
   }
 
   public void configureTeleOp() {
@@ -99,6 +96,10 @@ public class RobotContainer {
   public void configureAuto() {
     currentGameMode = gameMode.Auto;
     initializeSubsystems();
+    // 1. Start the Live View server
+    TurtleTracerLiveView.getInstance().start();
+    // 2. Link the Follower so Live View can read the pose
+    TurtleTracerLiveView.getInstance().setFollower(drive.getFollower());
     registerNamedCommands();
 
     // Schedule Auto Chooser
