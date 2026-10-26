@@ -17,6 +17,10 @@ import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.SenseColorsCommand;
+import org.firstinspires.ftc.teamcode.Commands.SenseDistanceCommand;
+import org.firstinspires.ftc.teamcode.Subsystems.ColorSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.DistSensor;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
@@ -29,6 +33,8 @@ public class RobotContainer {
   private Spindexer spindexer;
   private Outtake outtake;
   private Intake intake;
+  private ColorSensor colorSensor;
+  private DistSensor distanceSensor;
 
   private PinpointLocalizer pinpoint;
 
@@ -78,6 +84,8 @@ public class RobotContainer {
     intake = new Intake(hardwareMap, telemetry);
     outtake = new Outtake(hardwareMap);
     spindexer = new Spindexer(hardwareMap);
+    colorSensor = new ColorSensor(hardwareMap, telemetry);
+    distanceSensor = new DistSensor(hardwareMap, telemetry);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
   }
@@ -113,6 +121,10 @@ public class RobotContainer {
     new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
         .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.X)
+        .whenPressed(new SenseColorsCommand(colorSensor));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP)
+        .whenPressed(new SenseDistanceCommand(distanceSensor));
     // Gamepad 2 buttons
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));

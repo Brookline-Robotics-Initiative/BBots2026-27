@@ -47,4 +47,12 @@ public class Constants {
     public static final double OUTTAKE_SPEED = 3000; // TODO!!!
     public static final int OUTTAKE_START_POSITION = 0; // TODO!!!
   }
+
+  public static class ColorSensorConstants {
+    public static final String COLOR_SENSOR_ID = "colorSensor";
+  }
+
+  public static class DistanceSensorConstants {
+    public static final String DISTANCE_SENSOR_ID = "distanceSensor";
+  }
 }
