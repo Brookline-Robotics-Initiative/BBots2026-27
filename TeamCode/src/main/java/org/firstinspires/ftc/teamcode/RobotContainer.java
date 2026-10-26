@@ -79,7 +79,7 @@ public class RobotContainer {
     intake = new Intake(hardwareMap, telemetry);
     // spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(intake, spindexer, drive, autoDrive);
     // 1. Start the Live View server
     TurtleTracerLiveView.getInstance().start();
     // 2. Link the Follower so Live View can read the pose
@@ -149,9 +149,9 @@ public class RobotContainer {
     // "IntakeOn", new InstantCommand(() -> intake.intake()), "Turn intake on (intake mode)");
     NamedCommands.registerCommand(
         "IntakeCommand", () -> CommandScheduler.getInstance().schedule(new IntakeCommand(intake)));
-    NamedCommands.registerCommand(
-        "OuttakeCommand",
-        () -> CommandScheduler.getInstance().schedule(new OuttakeCommand(outtake)));
+    // NamedCommands.registerCommand(
+    // "OuttakeCommand",
+    // () -> CommandScheduler.getInstance().schedule(new OuttakeCommand(outtake)));
     NamedCommands.listAllCommands(telemetry);
   }
 
