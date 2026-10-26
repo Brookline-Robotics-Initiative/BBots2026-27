@@ -51,4 +51,8 @@ public class Constants {
   public static class ColorSensorConstants {
     public static final String COLOR_SENSOR_ID = "colorSensor";
   }
+
+  public static class DistanceSensorConstants {
+    public static final String DISTANCE_SENSOR_ID = "distanceSensor";
+  }
 }
