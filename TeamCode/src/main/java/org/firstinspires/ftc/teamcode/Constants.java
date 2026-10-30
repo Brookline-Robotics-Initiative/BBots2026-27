@@ -43,8 +43,9 @@ public class Constants {
     public static final double OUTTAKE_TICKS_PER_REV = 28;
     public static final double OUTTAKE_MAX_VELOCITY =
         OUTTAKE_RPM * OUTTAKE_TICKS_PER_REV / 60; // 2800 ticks/s
+    public static final double OUTTAKE_SPEED = 3000; //TODO!!!
+    public static final int OUTTAKE_START_POSITION = 0; //TODO!!!
 
-    public static final double OUTTAKE_SPEED = 3000; // TODO!!!
-    public static final int OUTTAKE_START_POSITION = 0; // TODO!!!
+    public static final int OUTTAKE_TARGET_POSITION = 20; //TODO!!!
   }
 }
