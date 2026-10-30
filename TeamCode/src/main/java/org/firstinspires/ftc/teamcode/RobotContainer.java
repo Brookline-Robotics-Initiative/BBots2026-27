@@ -10,8 +10,10 @@ import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.turtletracerlib.pathing.NamedCommands;
+import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.TelemetryCalibration;
 import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
@@ -48,7 +50,8 @@ public class RobotContainer {
 
   public enum AutoMode { // Enum of all valid autonomous modes
     ExampleAuto,
-    DoNothingAuto;
+    DoNothingAuto,
+    TelemetryCalibrationAuto;
   }
 
   private AutoMode currentAuto;
@@ -127,10 +130,11 @@ public class RobotContainer {
     try {
       if (selectedAutoMode == AutoMode.DoNothingAuto) {
         CommandScheduler.getInstance().schedule(new InstantCommand());
-      } else if (Math.random() > 0.5) {
-        System.out.println("FIXME: Update this part");
+      } else if (selectedAutoMode == AutoMode.TelemetryCalibrationAuto) {
+        CommandScheduler.getInstance()
+            .schedule(new TelemetryCalibration(autoDrive.getFollower(), hardwareMap, telemetry));
       }
-    } catch (final Error error) {
+    } catch (final IOException error) {
       telemetry.addLine("A critical IOException error has occurred. Doing nothing. ");
       telemetry.addLine(error.toString());
       telemetry.update();
