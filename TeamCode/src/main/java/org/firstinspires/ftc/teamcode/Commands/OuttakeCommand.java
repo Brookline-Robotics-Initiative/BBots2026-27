@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode.Commands;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
-import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
+
+import org.firstinspires.ftc.teamcode.Subsystems.SnailOuttake;
 
 public class OuttakeCommand extends CommandBase {
 
-  private final Outtake outtake;
-
-  public OuttakeCommand(Outtake outtake) {
-    this.outtake = outtake;
-    addRequirements(outtake);
-  }
+    private final SnailOuttake outtake;
+    public OuttakeCommand(SnailOuttake outtake){
+        this.outtake = outtake;
+        addRequirements(outtake);
+    }
 
   @Override
   public void execute() {
