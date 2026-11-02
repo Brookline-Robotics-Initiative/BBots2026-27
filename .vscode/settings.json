@@ -31,4 +31,5 @@
     },
     "spotlessGradle.format.enable": true,
     "spotlessGradle.diagnostics.enable": true
+    "java.gradle.buildServer.enabled": "off"
 }
