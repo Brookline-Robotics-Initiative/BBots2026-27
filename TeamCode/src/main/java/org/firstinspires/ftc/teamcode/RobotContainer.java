@@ -12,23 +12,30 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.turtletracerlib.pathing.NamedCommands;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
+
 import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
-// import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+
+import org.firstinspires.ftc.teamcode.Commands.OuttakeEndPositionCommand;
+import org.firstinspires.ftc.teamcode.Commands.OuttakeStartPositionCommand;
+import org.firstinspires.ftc.teamcode.Subsystems.SnailOuttake;
+import org.firstinspires.ftc.teamcode.Subsystems.TrebushotOuttake;
+
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
-import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
 import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
+
 
 public class RobotContainer {
   // Subsystems
   private Drivetrain drive;
   private Drivetrain autoDrive;
   private Spindexer spindexer;
-  private Outtake outtake;
   private Intake intake;
+  //private SnailOuttake outtake;
+  private TrebushotOuttake outtake;
+  //private Intake intake;
 
   private PinpointLocalizer pinpoint;
 
@@ -73,11 +80,13 @@ public class RobotContainer {
   public void initializeSubsystems() {
     //    pinpoint = new PinpointLocalizer(hardwareMap, new PinpointConfig()); FIXME: This isn't
     // being implemented
+
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     intake = new Intake(hardwareMap, telemetry);
-    outtake = new Outtake(hardwareMap);
     spindexer = new Spindexer(hardwareMap);
+    //outtake = new SnailOuttake(hardwareMap);
+    outtake = new TrebushotOuttake(hardwareMap);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
   }
@@ -114,10 +123,17 @@ public class RobotContainer {
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
         .whenPressed(new InstantCommand(() -> intake.stop(), intake));
     // Gamepad 2 buttons
-    new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
-    new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
+    //new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeStartPositionCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new OuttakeEndPositionCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.X)
         .whenPressed(new InstantCommand(outtake::stop, outtake));
+
+   // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
+    //new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new SpindexerAgitateCommand(spindexer));
+    // Gamepad 2 buttons
+    //new GamepadButton(gamepad1, GamepadKeys.Button.B).whenHeld(new IntakeCommand(intake));
+    //new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenHeld(new ExpelIntakeCommand(intake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
