@@ -9,7 +9,6 @@
     ],
     "java.import.gradle.enabled": false,
     "java.import.gradle.wrapper.enabled": true,
-    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
     "java.import.maven.enabled": false,
     "java.jdt.ls.androidSupport.enabled": "off",
     "java.gradle.buildServer.enabled": "off",

@@ -86,10 +86,10 @@ public class RobotContainer {
     currentGameMode = gameMode.TeleOp;
     initializeSubsystems();
 
-    // Default commands
-    // drive.setDefaultCommand(new DriveCommand(drive, gamepad1));
-    //    outtake.setDefaultCommand(new OuttakeCommand(outtake));
-    // Button bindings
+    Default commands
+    drive.setDefaultCommand(new DriveCommand(drive, gamepad1));
+      outtake.setDefaultCommand(new OuttakeCommand(outtake));
+    Button bindings
     configureButtonBindings();
   }
 
