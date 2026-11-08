@@ -47,4 +47,10 @@ public class Constants {
     public static final double OUTTAKE_SPEED = 3000; // TODO!!!
     public static final int OUTTAKE_START_POSITION = 0; // TODO!!!
   }
+
+  public static class StorageServoConstants {
+    public static final String STORAGE_SERVO_ID = "storageServo";
+    public static final double STORAGE_SERVO_INTAKE_POWER = 0.5;
+    public static final double STORAGE_SERVO_EXPEL_POWER = 0.5;
+  }
 }
