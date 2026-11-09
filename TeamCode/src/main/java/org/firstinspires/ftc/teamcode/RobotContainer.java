@@ -17,7 +17,9 @@ import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.hive1;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBase;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackBlueWall;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontBlueWall;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
@@ -54,7 +56,9 @@ public class RobotContainer {
     hive1,
     leaveBase,
     leaveBaseBackBlueWall,
-    leaveBaseFrontBlueWall;
+    leaveBaseFrontBlueWall,
+    leaveBaseFrontWall,
+    leaveBaseBackWall;
   }
 
   private AutoMode currentAuto;
@@ -139,10 +143,15 @@ public class RobotContainer {
       } else if (selectedAutoMode == AutoMode.leaveBaseFrontBlueWall) {
         CommandScheduler.getInstance()
             .schedule(new leaveBaseFrontBlueWall(autoDrive.getFollower(), hardwareMap, telemetry));
-
       } else if (selectedAutoMode == AutoMode.leaveBase) {
         CommandScheduler.getInstance()
             .schedule(new leaveBase(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseFrontWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseFrontWall(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseBackWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseBackWall(autoDrive.getFollower(), hardwareMap, telemetry));
       } else if (Math.random() > 0.5) {
         System.out.println("FIXME: Update this part");
       }
