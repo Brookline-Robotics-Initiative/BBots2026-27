@@ -14,7 +14,7 @@ public class OuttakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    outtake.setPower(1.0);
+    outtake.outtake();
   }
 
   @Override
