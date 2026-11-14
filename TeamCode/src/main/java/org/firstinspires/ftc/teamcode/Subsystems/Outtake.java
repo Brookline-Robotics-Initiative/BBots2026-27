@@ -17,12 +17,16 @@ public class Outtake extends SubsystemBase {
   // private final PIDFController pidf;
 
   public Outtake(final HardwareMap hwMap) {
-    outtakeMotor = new MotorEx(hwMap, Constants.OuttakeConstants.OUTTAKE_ID); // TODO add motor type
+    outtakeMotor =
+        new MotorEx(
+            hwMap,
+            Constants.OuttakeConstants.OUTTAKE_ID,
+            Motor.GoBILDA.BARE); // TODO add motor type
     encoder = outtakeMotor.encoder;
     outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
-    outtakeMotor.setPositionCoefficient(0.05); // TODO: change/tune
-    outtakeMotor.setPositionTolerance(10); // TODO: change/tune
-    outtakeMotor.setBuffer(1.0);
+    outtakeMotor.setPositionCoefficient(0.01); // TODO: change/tune
+    outtakeMotor.setPositionTolerance(100); // TODO: change/tune
+    outtakeMotor.setBuffer(0.8); // will get higher later
     // pidf = new PIDFController(0.0, 0.0, 0.0, 0.0); //TODO
   }
 
@@ -32,19 +36,18 @@ public class Outtake extends SubsystemBase {
     }
   }*/
 
-  public void setPower(final double power) {
-    outtakeMotor.set(power);
+  public void setPosition(final double position) {
+    outtakeMotor.set(position);
   }
 
   public void outtake() {
-    int oneRotationTicks = (int) outtakeMotor.getCPR();
-    outtakeMotor.setTargetPosition(outtakeMotor.getCurrentPosition() + oneRotationTicks);
-
+    outtakeMotor.setTargetPosition(
+        (int) (outtakeMotor.getCurrentPosition() + outtakeMotor.getCPR()));
     isMovingToTarget = true;
   }
 
   public boolean isFinished() {
-    return !isMovingToTarget;
+    return outtakeMotor.atTargetPosition();
   }
 
   //    public void resetToStartPosition(){
