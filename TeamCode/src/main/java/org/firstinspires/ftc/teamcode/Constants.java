@@ -21,7 +21,7 @@ public class Constants {
   }
 
   public static class IntakeConstants {
-    public static final Motor.GoBILDA INTAKE_MOTOR_TYPE = Motor.GoBILDA.BARE;
+    public static final Motor.GoBILDA INTAKE_MOTOR_TYPE = Motor.GoBILDA.RPM_1620;
     public static final String INTAKE_ID = "intakeMotor";
     public static final double INTAKE_MAX_VELOCITY =
         INTAKE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); // 2800 aka 6000 rpm
