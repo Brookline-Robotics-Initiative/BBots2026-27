@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
+import com.seattlesolvers.solverslib.hardware.motors.Motor.ZeroPowerBehavior;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 import org.firstinspires.ftc.teamcode.Constants;
 
@@ -24,6 +25,7 @@ public class Outtake extends SubsystemBase {
             Motor.GoBILDA.BARE); // TODO add motor type
     encoder = outtakeMotor.encoder;
     outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
+    outtakeMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
     outtakeMotor.setPositionCoefficient(0.01); // TODO: change/tune
     outtakeMotor.setPositionTolerance(100); // TODO: change/tune
     outtakeMotor.setBuffer(0.8); // will get higher later

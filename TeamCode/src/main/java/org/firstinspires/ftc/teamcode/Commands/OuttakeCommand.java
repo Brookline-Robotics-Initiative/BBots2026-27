@@ -17,6 +17,10 @@ public class OuttakeCommand extends CommandBase {
     outtake.outtake();
   }
 
+  public boolean isFinished() {
+    return outtake.isFinished();
+  }
+
   @Override
   public void end(boolean interrupted) {
     outtake.stop();
