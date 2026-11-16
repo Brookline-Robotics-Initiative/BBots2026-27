@@ -57,8 +57,9 @@ public class Constants {
     public static final int REDNECTAR_GREENVALUE = 50;
     public static final int REDNECTAR_BLUEVALUE = 80;
     public static final int POLLEN_REDVALUE = 100;
-    public static final int POLLEN_GREENVALUE = 50;
-    public static final int POLLEN_BLUEVALUE = 80;
+    public static final int POLLEN_GREENVALUE = 85;
+    public static final int POLLEN_BLUEVALUE = 140;
+    public static final int COLOR_SENSOR_TOLERANCE = 10;
   }
 
   public static class DistanceSensorConstants {

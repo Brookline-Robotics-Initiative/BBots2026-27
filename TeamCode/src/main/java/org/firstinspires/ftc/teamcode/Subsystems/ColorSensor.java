@@ -22,7 +22,53 @@ public class ColorSensor extends SubsystemBase {
     telemetry.update();
   }
 
-  public void seesBlueNectar() {
-    getRawColor(red) == RED_VALUE;
+  public boolean seesBlueNectar() {
+    if (colorSensor.blue()>Constants.ColorSensorConstants.BLUENECTAR_BLUEVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+     && colorSensor.blue()<Constants.ColorSensorConstants.BLUENECTAR_BLUEVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+      if (colorSensor.red()>Constants.ColorSensorConstants.BLUENECTAR_REDVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+           && colorSensor.red()<Constants.ColorSensorConstants.BLUENECTAR_REDVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+            if (colorSensor.green()>Constants.ColorSensorConstants.BLUENECTAR_GREENVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+            && colorSensor.green()<Constants.ColorSensorConstants.BLUENECTAR_GREENVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+                  return true;
+            }
+      }
+    }
+    return false;
+
+  }
+
+  public boolean seesRedNectar() {
+    if (colorSensor.blue()<Constants.ColorSensorConstants.REDNECTAR_BLUEVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+    && colorSensor.blue()>Constants.ColorSensorConstants.REDNECTAR_BLUEVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+      if (colorSensor.red()<Constants.ColorSensorConstants.REDNECTAR_REDVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+           && colorSensor.red()>Constants.ColorSensorConstants.REDNECTAR_REDVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+            if (colorSensor.green()<Constants.ColorSensorConstants.REDNECTAR_GREENVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+            && colorSensor.green()>Constants.ColorSensorConstants.REDNECTAR_GREENVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+                  return true;
+            }
+      }
+    }
+    return false;
+  }
+
+  public boolean seesPollen() {
+    if (colorSensor.blue()>Constants.ColorSensorConstants.POLLEN_BLUEVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+     && colorSensor.blue()<Constants.ColorSensorConstants.POLLEN_BLUEVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+      if (colorSensor.red()>Constants.ColorSensorConstants.POLLEN_REDVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+           && colorSensor.red()<Constants.ColorSensorConstants.POLLEN_REDVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+            if (colorSensor.green()>Constants.ColorSensorConstants.POLLEN_GREENVALUE-Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
+            && colorSensor.green()<Constants.ColorSensorConstants.POLLEN_GREENVALUE+Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE ) {
+                  return true;
+            }
+      }
+    }
+    return false;
+  }
+
+  public boolean seesAnything(){
+    if (seesBlueNectar() || seesRedNectar() || seesPollen()) {
+      return true;
+    }
+    return false;
   }
 }
