@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Commands;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
+import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.Subsystems.ColorSensor;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 
@@ -21,7 +22,7 @@ public class IntakeCommand extends CommandBase {
       if (sensor.seesBlueNectar()) {
         intake.expel();
       }
-    } else if (Alliance.geAlliance() == Alliance.alliance.BlueAlliance) {
+    } else if (Alliance.getAlliance() == Alliance.alliance.BlueAlliance) {
       if (sensor.seesRedNectar()) {
         intake.expel();
       }
