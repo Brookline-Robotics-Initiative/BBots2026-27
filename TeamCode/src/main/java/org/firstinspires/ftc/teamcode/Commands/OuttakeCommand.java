@@ -13,10 +13,11 @@ public class OuttakeCommand extends CommandBase {
   }
 
   @Override
-  public void execute() {
-    outtake.outtake();
+  public void initialize() {
+    outtake.setPosition(2000);
   }
 
+  @Override
   public boolean isFinished() {
     return outtake.isFinished();
   }

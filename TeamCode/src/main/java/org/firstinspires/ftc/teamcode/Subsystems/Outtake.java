@@ -5,6 +5,7 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.Motor.ZeroPowerBehavior;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
 
 public class Outtake extends SubsystemBase {
@@ -15,9 +16,14 @@ public class Outtake extends SubsystemBase {
   private final int RESET_POSITION = Constants.OuttakeConstants.OUTTAKE_START_POSITION;
   private boolean isMovingToTarget = false;
 
+  private double targetPosition = 0;
+
+  public Telemetry telemetry;
+
   // private final PIDFController pidf;
 
-  public Outtake(final HardwareMap hwMap) {
+  public Outtake(final HardwareMap hwMap, final Telemetry telemetry) {
+    this.telemetry = telemetry;
     outtakeMotor =
         new MotorEx(
             hwMap,
@@ -26,10 +32,10 @@ public class Outtake extends SubsystemBase {
     encoder = outtakeMotor.encoder;
     outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
     outtakeMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
-    outtakeMotor.setPositionCoefficient(0.01); // TODO: change/tune
-    outtakeMotor.setPositionTolerance(100); // TODO: change/tune
+    outtakeMotor.setPositionCoefficient(0.5); // TODO: change/tune
+    outtakeMotor.setPositionTolerance(2); // TODO: change/tune
     outtakeMotor.setBuffer(0.8); // will get higher later
-    // pidf = new PIDFController(0.0, 0.0, 0.0, 0.0); //TODO
+    // pidf = new PIDFController(0.005, 0.0, 0.0025, 0.00036); // TODO
   }
 
   /*public void setVelocity(final double velocity) {
@@ -39,17 +45,17 @@ public class Outtake extends SubsystemBase {
   }*/
 
   public void setPosition(final double position) {
-    outtakeMotor.set(position);
+    targetPosition = position;
   }
 
   public void outtake() {
     outtakeMotor.setTargetPosition(
-        (int) (outtakeMotor.getCurrentPosition() + outtakeMotor.getCPR()));
+        (int) (outtakeMotor.getCurrentPosition() + (outtakeMotor.getCPR() / 2)));
     isMovingToTarget = true;
   }
 
   public boolean isFinished() {
-    return outtakeMotor.atTargetPosition();
+    return false;
   }
 
   //    public void resetToStartPosition(){
@@ -65,11 +71,19 @@ public class Outtake extends SubsystemBase {
   //        }
   //        outtakeMotor.stopMotor();
   //    }
+  @Override
+  public void periodic() {
+    telemetry.addData("position: ", outtakeMotor.get());
+    telemetry.update();
+    // if (!isFinished()) {
+    outtakeMotor.set(targetPosition);
+    // }
+  }
 
   public void stop() {
     isMovingToTarget = false;
     outtakeMotor.setRunMode(Motor.RunMode.RawPower);
     outtakeMotor.set(0);
-    outtakeMotor.setRunMode(Motor.RunMode.VelocityControl);
+    outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
   }
 }
