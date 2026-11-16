@@ -21,4 +21,8 @@ public class ColorSensor extends SubsystemBase {
     telemetry.addData("green", colorSensor.green());
     telemetry.update();
   }
+
+  public void seesBlueNectar() {
+    getRawColor(red) == RED_VALUE;
+  }
 }
