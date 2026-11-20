@@ -15,6 +15,10 @@ import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.SenseColorsCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.ColorSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Intake;
+import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
+import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
 
 public class RobotContainer {
   // // Subsystems
@@ -121,6 +125,18 @@ public class RobotContainer {
     // ResetOuttakeCommand(outtake));
     // new GamepadButton(gamepad2, GamepadKeys.Button.X)
     //     .whenPressed(new InstantCommand(outtake::stop, outtake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.B)
+        .whenPressed(new IntakeCommand(intake, colorSensor));
+    new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.A)
+        .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.X)
+        .whenPressed(new SenseColorsCommand(colorSensor));
+    // Gamepad 2 buttons
+    new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.X)
+        .whenPressed(new InstantCommand(outtake::stop, outtake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
