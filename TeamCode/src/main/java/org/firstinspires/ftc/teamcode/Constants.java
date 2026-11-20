@@ -39,6 +39,7 @@ public class Constants {
   public static class OuttakeConstants {
     public static final String OUTTAKE_ID = "outtakeMotor";
 
+    public static final double OUTTAKE_POSITION = 0; // TODO: Change
     public static final double OUTTAKE_RPM = 6000; // TODO: CHANGE
     public static final double OUTTAKE_TICKS_PER_REV = 28;
     public static final double OUTTAKE_MAX_VELOCITY =

@@ -14,7 +14,16 @@ public class OuttakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    outtake.setPower(1.0);
+    if (!outtake.isPassed(0.5)) {
+      outtake.shoot();
+    } else if (outtake.isPassed(0.5)) {
+      outtake.stop();
+    }
+  }
+
+  @Override
+  public boolean isFinished() {
+    return outtake.isPassed(1);
   }
 
   @Override
