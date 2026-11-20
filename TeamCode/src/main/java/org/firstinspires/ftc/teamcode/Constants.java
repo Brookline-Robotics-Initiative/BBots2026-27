@@ -50,16 +50,16 @@ public class Constants {
 
   public static class ColorSensorConstants {
     public static final String COLOR_SENSOR_ID = "colorSensor";
-    public static final int BLUENECTAR_REDVALUE = 37;
-    public static final int BLUENECTAR_GREENVALUE = 110;
-    public static final int BLUENECTAR_BLUEVALUE = 60;
-    public static final int REDNECTAR_REDVALUE = 100;
-    public static final int REDNECTAR_GREENVALUE = 50;
-    public static final int REDNECTAR_BLUEVALUE = 80;
-    public static final int POLLEN_REDVALUE = 100;
-    public static final int POLLEN_GREENVALUE = 85;
-    public static final int POLLEN_BLUEVALUE = 140;
-    public static final int COLOR_SENSOR_TOLERANCE = 10;
+    public static final int BLUENECTAR_REDVALUE = 50;
+    public static final int BLUENECTAR_GREENVALUE = 100;
+    public static final int BLUENECTAR_BLUEVALUE = 250;
+    public static final int REDNECTAR_REDVALUE = 300;
+    public static final int REDNECTAR_GREENVALUE = 200;
+    public static final int REDNECTAR_BLUEVALUE = 130;
+    public static final int POLLEN_REDVALUE = 400;
+    public static final int POLLEN_GREENVALUE = 600;
+    public static final int POLLEN_BLUEVALUE = 220;
+    public static final int COLOR_SENSOR_TOLERANCE = 100;
   }
 
   public static class DistanceSensorConstants {

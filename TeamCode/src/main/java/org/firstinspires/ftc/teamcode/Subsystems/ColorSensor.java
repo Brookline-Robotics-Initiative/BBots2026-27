@@ -5,6 +5,9 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.SensorRevColorV3;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constants.ColorSensorConstants;
+import org.firstinspires.ftc.teamcode.Constants.ColorSensorConstants.*;
+import org.firstinspires.ftc.teamcode.Utils.Utils;
 
 public class ColorSensor extends SubsystemBase {
   private final SensorRevColorV3 colorSensor;
@@ -19,28 +22,26 @@ public class ColorSensor extends SubsystemBase {
     telemetry.addData("red", colorSensor.red());
     telemetry.addData("blue", colorSensor.blue());
     telemetry.addData("green", colorSensor.green());
+    telemetry.addData("seesBlueNectar:", this.seesBlueNectar());
+    telemetry.addData("seesRedNectar", this.seesRedNectar());
+    telemetry.addData("seesPollen:", this.seesPollen());
+    telemetry.addData("seesAnything:", this.seesAnything());
     telemetry.update();
   }
 
   public boolean seesBlueNectar() {
-    if (colorSensor.blue()
-            > Constants.ColorSensorConstants.BLUENECTAR_BLUEVALUE
-                - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-        && colorSensor.blue()
-            < Constants.ColorSensorConstants.BLUENECTAR_BLUEVALUE
-                + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-      if (colorSensor.red()
-              > Constants.ColorSensorConstants.BLUENECTAR_REDVALUE
-                  - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-          && colorSensor.red()
-              < Constants.ColorSensorConstants.BLUENECTAR_REDVALUE
-                  + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-        if (colorSensor.green()
-                > Constants.ColorSensorConstants.BLUENECTAR_GREENVALUE
-                    - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-            && colorSensor.green()
-                < Constants.ColorSensorConstants.BLUENECTAR_GREENVALUE
-                    + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
+    if (Utils.isWithinTolerance(
+        ColorSensorConstants.BLUENECTAR_BLUEVALUE,
+        colorSensor.blue(),
+        ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+      if (Utils.isWithinTolerance(
+          ColorSensorConstants.BLUENECTAR_REDVALUE,
+          colorSensor.red(),
+          ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+        if (Utils.isWithinTolerance(
+            ColorSensorConstants.BLUENECTAR_GREENVALUE,
+            colorSensor.green(),
+            ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
           return true;
         }
       }
@@ -49,24 +50,20 @@ public class ColorSensor extends SubsystemBase {
   }
 
   public boolean seesRedNectar() {
-    if (colorSensor.blue()
-            < Constants.ColorSensorConstants.REDNECTAR_BLUEVALUE
-                + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-        && colorSensor.blue()
-            > Constants.ColorSensorConstants.REDNECTAR_BLUEVALUE
-                - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-      if (colorSensor.red()
-              < Constants.ColorSensorConstants.REDNECTAR_REDVALUE
-                  + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-          && colorSensor.red()
-              > Constants.ColorSensorConstants.REDNECTAR_REDVALUE
-                  - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-        if (colorSensor.green()
-                < Constants.ColorSensorConstants.REDNECTAR_GREENVALUE
-                    + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-            && colorSensor.green()
-                > Constants.ColorSensorConstants.REDNECTAR_GREENVALUE
-                    - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
+    if (Utils.isWithinTolerance(
+        ColorSensorConstants.REDNECTAR_BLUEVALUE,
+        colorSensor.blue(),
+        ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+
+      if (Utils.isWithinTolerance(
+          ColorSensorConstants.REDNECTAR_REDVALUE,
+          colorSensor.red(),
+          ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+
+        if (Utils.isWithinTolerance(
+            ColorSensorConstants.REDNECTAR_GREENVALUE,
+            colorSensor.green(),
+            ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
           return true;
         }
       }
@@ -75,24 +72,18 @@ public class ColorSensor extends SubsystemBase {
   }
 
   public boolean seesPollen() {
-    if (colorSensor.blue()
-            > Constants.ColorSensorConstants.POLLEN_BLUEVALUE
-                - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-        && colorSensor.blue()
-            < Constants.ColorSensorConstants.POLLEN_BLUEVALUE
-                + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-      if (colorSensor.red()
-              > Constants.ColorSensorConstants.POLLEN_REDVALUE
-                  - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-          && colorSensor.red()
-              < Constants.ColorSensorConstants.POLLEN_REDVALUE
-                  + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
-        if (colorSensor.green()
-                > Constants.ColorSensorConstants.POLLEN_GREENVALUE
-                    - Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE
-            && colorSensor.green()
-                < Constants.ColorSensorConstants.POLLEN_GREENVALUE
-                    + Constants.ColorSensorConstants.COLOR_SENSOR_TOLERANCE) {
+    if (Utils.isWithinTolerance(
+        ColorSensorConstants.POLLEN_BLUEVALUE,
+        colorSensor.blue(),
+        ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+      if (Utils.isWithinTolerance(
+          ColorSensorConstants.POLLEN_REDVALUE,
+          colorSensor.red(),
+          ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
+        if (Utils.isWithinTolerance(
+            ColorSensorConstants.POLLEN_GREENVALUE,
+            colorSensor.green(),
+            ColorSensorConstants.COLOR_SENSOR_TOLERANCE)) {
           return true;
         }
       }
