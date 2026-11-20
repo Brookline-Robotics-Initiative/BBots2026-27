@@ -73,13 +73,13 @@ public class RobotContainer {
   public void initializeSubsystems() {
     //    pinpoint = new PinpointLocalizer(hardwareMap, new PinpointConfig()); FIXME: This isn't
     // being implemented
-    drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
-    autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
-    intake = new Intake(hardwareMap, telemetry);
+    // drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    // autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
+    // intake = new Intake(hardwareMap, telemetry);
     outtake = new Outtake(hardwareMap, telemetry);
-    spindexer = new Spindexer(hardwareMap);
+    // spindexer = new Spindexer(hardwareMap);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(outtake);
   }
 
   public void configureTeleOp() {

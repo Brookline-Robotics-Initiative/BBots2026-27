@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
+import com.seattlesolvers.solverslib.controller.PIDFController;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
-import com.seattlesolvers.solverslib.hardware.motors.Motor.ZeroPowerBehavior;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -14,13 +14,15 @@ public class Outtake extends SubsystemBase {
   private final double MAX_VELOCITY = Constants.OuttakeConstants.OUTTAKE_MAX_VELOCITY;
   private final double MIN_VELOCITY = 1;
   private final int RESET_POSITION = Constants.OuttakeConstants.OUTTAKE_START_POSITION;
-  private boolean isMovingToTarget = false;
+  private int lastShootPosition = 0;
+  private final double tolerance = 10; // TUNE
+  // private boolean isMovingToTarget = false;
 
   private double targetPosition = 0;
 
   public Telemetry telemetry;
 
-  // private final PIDFController pidf;
+  private final PIDFController pidf;
 
   public Outtake(final HardwareMap hwMap, final Telemetry telemetry) {
     this.telemetry = telemetry;
@@ -30,12 +32,15 @@ public class Outtake extends SubsystemBase {
             Constants.OuttakeConstants.OUTTAKE_ID,
             Motor.GoBILDA.BARE); // TODO add motor type
     encoder = outtakeMotor.encoder;
-    outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
-    outtakeMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
-    outtakeMotor.setPositionCoefficient(0.5); // TODO: change/tune
-    outtakeMotor.setPositionTolerance(2); // TODO: change/tune
-    outtakeMotor.setBuffer(0.8); // will get higher later
-    // pidf = new PIDFController(0.005, 0.0, 0.0025, 0.00036); // TODO
+    outtakeMotor.setRunMode(
+        Motor.RunMode
+            .RawPower); // keep track of the encoder position and do control loop -- control loop
+    // runs with pid and tuning is manual
+    // outtakeMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
+    // outtakeMotor.setBuffer(0.8); // will get higher later
+    pidf = new PIDFController(0.005, 0.0, 0.0025, 0.00036); // TUNE
+    lastShootPosition = outtakeMotor.getCurrentPosition();
+    outtakeMotor.setInverted(true);
   }
 
   /*public void setVelocity(final double velocity) {
@@ -44,18 +49,30 @@ public class Outtake extends SubsystemBase {
     }
   }*/
 
-  public void setPosition(final double position) {
-    targetPosition = position;
+  public void setPosition() {
+    targetPosition =
+        pidf.calculate(
+            outtakeMotor.getCurrentPosition(), Constants.OuttakeConstants.OUTTAKE_POSITION);
   }
 
-  public void outtake() {
-    outtakeMotor.setTargetPosition(
-        (int) (outtakeMotor.getCurrentPosition() + (outtakeMotor.getCPR() / 2)));
-    isMovingToTarget = true;
+  public boolean atPosition() {
+    return outtakeMotor.atTargetPosition();
   }
 
-  public boolean isFinished() {
-    return false;
+  // rotations measures what direction and how far the outtake paddle
+  public boolean isPassed(double rotations) {
+    // should move
+    return (outtakeMotor.getCurrentPosition()
+        >= (lastShootPosition + outtakeMotor.getCPR() * rotations));
+  }
+
+  public int getPosition() {
+    return outtakeMotor.getCurrentPosition();
+  }
+
+  public void shoot() {
+    lastShootPosition = outtakeMotor.getCurrentPosition();
+    outtakeMotor.setVelocity(MAX_VELOCITY * 0.9);
   }
 
   //    public void resetToStartPosition(){
@@ -73,17 +90,12 @@ public class Outtake extends SubsystemBase {
   //    }
   @Override
   public void periodic() {
-    telemetry.addData("position: ", outtakeMotor.get());
+    telemetry.addData("outtake position", outtakeMotor.getCurrentPosition());
+    telemetry.addData("outtake power", outtakeMotor.get());
     telemetry.update();
-    // if (!isFinished()) {
-    outtakeMotor.set(targetPosition);
-    // }
   }
 
   public void stop() {
-    isMovingToTarget = false;
-    outtakeMotor.setRunMode(Motor.RunMode.RawPower);
     outtakeMotor.set(0);
-    outtakeMotor.setRunMode(Motor.RunMode.PositionControl);
   }
 }
