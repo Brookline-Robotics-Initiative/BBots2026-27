@@ -43,8 +43,7 @@ public class Constants {
   }
 
   public static class StorageConstants {
-    public static final Motor.GoBILDA STORAGE_MOTOR_TYPE =
-        Motor.GoBILDA.RPM_312; // TODO change this
+    public static final Motor.GoBILDA STORAGE_MOTOR_TYPE = Motor.GoBILDA.RPM_1620;
     public static final String STORAGE_ID = "storageMotor";
     public static final double STORAGE_MAX_VELOCITY =
         STORAGE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); // 2800 aka 6000 rpm
