@@ -22,6 +22,7 @@ public class Intake extends SubsystemBase {
             Constants.IntakeConstants.INTAKE_ID,
             Constants.IntakeConstants.INTAKE_MOTOR_TYPE); // 6000rpm
     intakeMotor.setRunMode(Motor.RunMode.VelocityControl); // pls need explanation
+    intakeMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     // intakeMotor.setInverted(true); -- if needed
   }
 

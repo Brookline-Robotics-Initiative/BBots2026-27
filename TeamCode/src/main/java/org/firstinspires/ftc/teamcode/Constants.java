@@ -29,13 +29,6 @@ public class Constants {
     public static final double EXPEL_VELOCITY = INTAKE_MAX_VELOCITY * 0.2; // 560 aka 1200 rpm
   }
 
-  public static class SpindexerConstants {
-    public static final String SPIN_ID = "spindexerMotor";
-
-    public static final double SPIN_VELOCITY = 1000; // TODO: Change
-    public static final double SPIN_MAX_VELOCITY = 7000; // rpm
-  }
-
   public static class OuttakeConstants {
     public static final String OUTTAKE_ID = "outtakeMotor";
 
@@ -46,5 +39,15 @@ public class Constants {
 
     public static final double OUTTAKE_SPEED = 3000; // TODO!!!
     public static final int OUTTAKE_START_POSITION = 0; // TODO!!!
+  }
+
+  public static class StorageConstants {
+    public static final Motor.GoBILDA STORAGE_MOTOR_TYPE =
+        Motor.GoBILDA.RPM_312; // TODO change this
+    public static final String STORAGE_ID = "storageMotor";
+    public static final double STORAGE_MAX_VELOCITY =
+        STORAGE_MOTOR_TYPE.getAchievableMaxTicksPerSecond(); // 2800 aka 6000 rpm
+    public static final double INTAKE_VELOCITY = STORAGE_MAX_VELOCITY * 0.9; // 560 aka 1200 rpm
+    public static final double EXPEL_VELOCITY = STORAGE_MAX_VELOCITY * 0.1; // 560 aka 1200 rpm
   }
 }

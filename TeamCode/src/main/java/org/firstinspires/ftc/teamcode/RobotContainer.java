@@ -14,23 +14,26 @@ import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.TelemetryCalibration;
+import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.StorageCommand;
+import org.firstinspires.ftc.teamcode.Commands.StorageExpelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
-import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
+import org.firstinspires.ftc.teamcode.Subsystems.Storage;
 
 public class RobotContainer {
   // Subsystems
   private Drivetrain drive;
   private Drivetrain autoDrive;
-  private Spindexer spindexer;
   private Outtake outtake;
   private Intake intake;
+  private Storage storage;
 
   private PinpointLocalizer pinpoint;
 
@@ -80,9 +83,9 @@ public class RobotContainer {
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     intake = new Intake(hardwareMap, telemetry);
     outtake = new Outtake(hardwareMap);
-    spindexer = new Spindexer(hardwareMap);
+    storage = new Storage(hardwareMap, telemetry);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(intake, outtake, spindexer, drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(intake, storage, outtake, drive, autoDrive);
   }
 
   public void configureTeleOp() {
@@ -90,7 +93,7 @@ public class RobotContainer {
     initializeSubsystems();
 
     // Default commands
-    // drive.setDefaultCommand(new DriveCommand(drive, gamepad1));
+    drive.setDefaultCommand(new DriveCommand(drive, gamepad1));
     //    outtake.setDefaultCommand(new OuttakeCommand(outtake));
     // Button bindings
     configureButtonBindings();
@@ -116,6 +119,12 @@ public class RobotContainer {
     new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
         .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_RIGHT)
+        .whenPressed(new StorageCommand(storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP)
+        .whenPressed(new StorageExpelCommand(storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN)
+        .whenPressed(new InstantCommand(() -> storage.stop(), storage));
     // Gamepad 2 buttons
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
