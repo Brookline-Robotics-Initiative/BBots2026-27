@@ -82,7 +82,7 @@ public class RobotContainer {
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     intake = new Intake(hardwareMap, telemetry);
-    outtake = new Outtake(hardwareMap);
+    outtake = new Outtake(hardwareMap, telemetry);
     storage = new Storage(hardwareMap, telemetry);
     // Register subsystems with scheduler
     CommandScheduler.getInstance().registerSubsystem(intake, storage, outtake, drive, autoDrive);

@@ -13,17 +13,17 @@ public class ResetOuttakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    // outtake.resetToStartPosition();
+    outtake.setPosition();
   }
 
+  @Override
   public void end(boolean interrupted) {
     outtake.stop();
   }
 
   @Override
   public boolean isFinished() {
-    // FIXME: finish once the reset position is reached. Otherwise, just make this a pseudo stop
-    // command.
-    return true;
+    // return outtake.atPosition();
+    return false;
   }
 }
