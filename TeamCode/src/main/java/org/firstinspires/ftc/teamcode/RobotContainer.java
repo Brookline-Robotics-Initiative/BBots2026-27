@@ -9,6 +9,7 @@ import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
+import com.turtletracerlib.TurtleTracerLiveView;
 import com.turtletracerlib.pathing.NamedCommands;
 import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -18,6 +19,12 @@ import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.hive1;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBase;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackBlueWall;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackWall;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontBlueWall;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.StorageCommand;
@@ -54,7 +61,12 @@ public class RobotContainer {
   public enum AutoMode { // Enum of all valid autonomous modes
     ExampleAuto,
     DoNothingAuto,
-    TelemetryCalibrationAuto;
+    hive1,
+    leaveBase,
+    leaveBaseBackBlueWall,
+    leaveBaseFrontBlueWall,
+    leaveBaseFrontWall,
+    leaveBaseBackWall;
   }
 
   private AutoMode currentAuto;
@@ -102,6 +114,10 @@ public class RobotContainer {
   public void configureAuto() {
     currentGameMode = gameMode.Auto;
     initializeSubsystems();
+    // 1. Start the Live View server
+    TurtleTracerLiveView.getInstance().start();
+    // 2. Link the Follower so Live View can read the pose
+    TurtleTracerLiveView.getInstance().setFollower(drive.getFollower());
     registerNamedCommands();
 
     // Schedule Auto Chooser
@@ -139,6 +155,24 @@ public class RobotContainer {
     try {
       if (selectedAutoMode == AutoMode.DoNothingAuto) {
         CommandScheduler.getInstance().schedule(new InstantCommand());
+      } else if (selectedAutoMode == AutoMode.hive1) {
+        CommandScheduler.getInstance()
+            .schedule(new hive1(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseBackBlueWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseBackBlueWall(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseFrontBlueWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseFrontBlueWall(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBase) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBase(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseFrontWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseFrontWall(autoDrive.getFollower(), hardwareMap, telemetry));
+      } else if (selectedAutoMode == AutoMode.leaveBaseBackWall) {
+        CommandScheduler.getInstance()
+            .schedule(new leaveBaseBackWall(autoDrive.getFollower(), hardwareMap, telemetry));
       } else if (selectedAutoMode == AutoMode.TelemetryCalibrationAuto) {
         CommandScheduler.getInstance()
             .schedule(new TelemetryCalibration(autoDrive.getFollower(), hardwareMap, telemetry));
@@ -156,6 +190,11 @@ public class RobotContainer {
     // Register  commands
     // NamedCommands.registerCommand(
     // "IntakeOn", new InstantCommand(() -> intake.intake()), "Turn intake on (intake mode)");
+    NamedCommands.registerCommand(
+        "IntakeCommand", () -> CommandScheduler.getInstance().schedule(new IntakeCommand(intake)));
+    // NamedCommands.registerCommand(
+    // "OuttakeCommand",
+    // () -> CommandScheduler.getInstance().schedule(new OuttakeCommand(outtake)));
     NamedCommands.listAllCommands(telemetry);
   }
 
@@ -172,6 +211,7 @@ public class RobotContainer {
             telemetry.addData("Pos y", autoDrive.getFollower().getPose().getY());
             telemetry.addData("Heading: ", autoDrive.getFollower().getPose().getHeading());
       */
+
     }
   }
 }
