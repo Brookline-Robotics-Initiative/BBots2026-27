@@ -4,5 +4,23 @@
     "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
     "java.import.maven.enabled": false,
     "java.jdt.ls.androidSupport.enabled": "off",
-    "java.gradle.buildServer.enabled": "off"
+    "java.gradle.buildServer.enabled": "off",
+    "editor.formatOnSave": true,
+    "[java]": {
+        "editor.formatOnSave": false
+    },
+    "[groovy]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+        "editor.formatOnSave": true
+    },
+    "spotlessGradle.format.enable": true,
+    "spotlessGradle.diagnostics.enable": true
 }

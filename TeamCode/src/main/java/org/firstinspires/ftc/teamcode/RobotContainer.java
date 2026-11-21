@@ -14,25 +14,33 @@ import com.turtletracerlib.pathing.NamedCommands;
 import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
+import org.firstinspires.ftc.teamcode.Commands.AutoCommands.TelemetryCalibration;
+import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.hive1;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBase;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackBlueWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontBlueWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
-import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+// import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.StorageCommand;
+import org.firstinspires.ftc.teamcode.Commands.StorageExpelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
-import org.firstinspires.ftc.teamcode.Subsystems.Spindexer;
+import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
+import org.firstinspires.ftc.teamcode.Subsystems.Storage;
 
 public class RobotContainer {
   // Subsystems
   private Drivetrain drive;
   private Drivetrain autoDrive;
-  private Spindexer spindexer;
+  private Outtake outtake;
   private Intake intake;
+  private Storage storage;
 
   private PinpointLocalizer pinpoint;
 
@@ -86,9 +94,10 @@ public class RobotContainer {
     drive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     autoDrive = new Drivetrain(hardwareMap, telemetry, currentGameMode);
     intake = new Intake(hardwareMap, telemetry);
-    // spindexer = new Spindexer(hardwareMap);
+    outtake = new Outtake(hardwareMap, telemetry);
+    storage = new Storage(hardwareMap, telemetry);
     // Register subsystems with scheduler
-    CommandScheduler.getInstance().registerSubsystem(intake, spindexer, drive, autoDrive);
+    CommandScheduler.getInstance().registerSubsystem(intake, storage, outtake, drive, autoDrive);
   }
 
   public void configureTeleOp() {
@@ -97,6 +106,7 @@ public class RobotContainer {
 
     // Default commands
     drive.setDefaultCommand(new DriveCommand(drive, gamepad1));
+    //    outtake.setDefaultCommand(new OuttakeCommand(outtake));
     // Button bindings
     configureButtonBindings();
   }
@@ -120,11 +130,22 @@ public class RobotContainer {
     // SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
     // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new
     // SpindexerAgitateCommand(spindexer));
-    // Gamepad 2 buttons
+    // Gamepad 1 buttons
     new GamepadButton(gamepad1, GamepadKeys.Button.B).whenPressed(new IntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
         .whenPressed(new InstantCommand(() -> intake.stop(), intake));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_RIGHT)
+        .whenPressed(new StorageCommand(storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP)
+        .whenPressed(new StorageExpelCommand(storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN)
+        .whenPressed(new InstantCommand(() -> storage.stop(), storage));
+    // Gamepad 2 buttons
+    new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
+    new GamepadButton(gamepad2, GamepadKeys.Button.X)
+        .whenPressed(new InstantCommand(outtake::stop, outtake));
   }
 
   public void scheduleAutoCommands(final AutoMode selectedAutoMode) {
@@ -152,8 +173,9 @@ public class RobotContainer {
       } else if (selectedAutoMode == AutoMode.leaveBaseBackWall) {
         CommandScheduler.getInstance()
             .schedule(new leaveBaseBackWall(autoDrive.getFollower(), hardwareMap, telemetry));
-      } else if (Math.random() > 0.5) {
-        System.out.println("FIXME: Update this part");
+      } else if (selectedAutoMode == AutoMode.TelemetryCalibrationAuto) {
+        CommandScheduler.getInstance()
+            .schedule(new TelemetryCalibration(autoDrive.getFollower(), hardwareMap, telemetry));
       }
     } catch (final IOException error) {
       telemetry.addLine("A critical IOException error has occurred. Doing nothing. ");
