@@ -15,10 +15,6 @@ import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.AutoChooser;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.TelemetryCalibration;
-import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.hive1;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBase;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackBlueWall;
@@ -26,6 +22,10 @@ import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseBackWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontBlueWall;
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.StorageCommand;
 import org.firstinspires.ftc.teamcode.Commands.StorageExpelCommand;
@@ -66,7 +66,8 @@ public class RobotContainer {
     leaveBaseBackBlueWall,
     leaveBaseFrontBlueWall,
     leaveBaseFrontWall,
-    leaveBaseBackWall;
+    leaveBaseBackWall,
+    TelemetryCalibrationAuto;
   }
 
   private AutoMode currentAuto;
