@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.CommandScheduler;
 import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.ParallelCommandGroup;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
@@ -23,12 +24,10 @@ import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontBlueWa
 import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
 // import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Commands.ExpelIntakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Commands.ExpelBothCommand;
+import org.firstinspires.ftc.teamcode.Commands.IntakeAndStoreCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
-import org.firstinspires.ftc.teamcode.Commands.StorageCommand;
-import org.firstinspires.ftc.teamcode.Commands.StorageExpelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Subsystems.Outtake;
@@ -127,21 +126,15 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Gamepad 1 buttons
-    // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP).whenHeld(new
-    // SpindexerOutCommand(spindexer)); //TODO: make it not whenHeld
-    // new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN).whenHeld(new
-    // SpindexerAgitateCommand(spindexer));
-    // Gamepad 1 buttons
-    new GamepadButton(gamepad1, GamepadKeys.Button.B).whenPressed(new IntakeCommand(intake));
-    new GamepadButton(gamepad1, GamepadKeys.Button.Y).whenPressed(new ExpelIntakeCommand(intake));
     new GamepadButton(gamepad1, GamepadKeys.Button.A)
-        .whenPressed(new InstantCommand(() -> intake.stop(), intake));
-    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_RIGHT)
-        .whenPressed(new StorageCommand(storage));
-    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_UP)
-        .whenPressed(new StorageExpelCommand(storage));
-    new GamepadButton(gamepad1, GamepadKeys.Button.DPAD_DOWN)
-        .whenPressed(new InstantCommand(() -> storage.stop(), storage));
+        .whenPressed(new IntakeAndStoreCommand(intake, storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.Y)
+        .whenPressed(new ExpelBothCommand(intake, storage));
+    new GamepadButton(gamepad1, GamepadKeys.Button.B)
+        .whenPressed(
+            new ParallelCommandGroup(
+                new InstantCommand(() -> intake.stop(), intake),
+                new InstantCommand(() -> storage.stop(), storage)));
     // Gamepad 2 buttons
     new GamepadButton(gamepad2, GamepadKeys.Button.A).whenPressed(new OuttakeCommand(outtake));
     new GamepadButton(gamepad2, GamepadKeys.Button.B).whenPressed(new ResetOuttakeCommand(outtake));
