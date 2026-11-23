@@ -89,11 +89,7 @@ public class Outtake extends SubsystemBase {
   //        outtakeMotor.stopMotor();
   //    }
   @Override
-  public void periodic() {
-    telemetry.addData("outtake position", outtakeMotor.getCurrentPosition());
-    telemetry.addData("outtake power", outtakeMotor.get());
-    telemetry.update();
-  }
+  public void periodic() {}
 
   public void stop() {
     outtakeMotor.set(0);

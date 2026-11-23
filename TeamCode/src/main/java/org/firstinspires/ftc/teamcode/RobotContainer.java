@@ -26,6 +26,7 @@ import org.firstinspires.ftc.teamcode.Commands.AutoCommands.leaveBaseFrontWall;
 import org.firstinspires.ftc.teamcode.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Commands.ExpelBothCommand;
 import org.firstinspires.ftc.teamcode.Commands.IntakeAndStoreCommand;
+import org.firstinspires.ftc.teamcode.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.Commands.ResetOuttakeCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.Drivetrain;

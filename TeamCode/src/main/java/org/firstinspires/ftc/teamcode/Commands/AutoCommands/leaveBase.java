@@ -1,7 +1,7 @@
 /* ============================================================= *
  *                 Turtle Tracer — Auto-Generated                *
  *                                                               *
- *  Version: 2.5.1.                                              *
+ *  Version: 2.5.0.                                              *
  *  Copyright (c) 2026 Matthew Allen                             *
  *                                                               *
  *  THIS FILE IS AUTO-GENERATED — DO NOT EDIT MANUALLY.          *
@@ -10,25 +10,15 @@
 
 package org.firstinspires.ftc.teamcode.Commands.AutoCommands;
 
-import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
-import static com.pedropathing.api.Paths.path;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
-import com.pedropathing.paths.interpolator.Interpolator;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.seattlesolvers.solverslib.command.InstantCommand;
-import com.seattlesolvers.solverslib.command.ParallelRaceGroup;
-import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
-import com.seattlesolvers.solverslib.command.WaitCommand;
-import com.seattlesolvers.solverslib.command.WaitUntilCommand;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
-import com.turtletracerlib.TurtleTracerReader;
-import com.turtletracerlib.pathing.NamedCommands;
 import java.io.IOException;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -45,17 +35,12 @@ public class leaveBase extends SequentialCommandGroup {
   private Path startPointTODriveToShoot;
 
   public leaveBase(final Follower follower, HardwareMap hw, Telemetry telemetry)
-    throws IOException {
+      throws IOException {
     this.follower = follower;
 
-    TurtleTracerReader pp = new TurtleTracerReader(
-      "leaveBase.turt",
-      hw.appContext
-    );
-
     // Load poses
-    startPoint = pp.get("startPoint");
-    DriveToShoot = pp.get("DriveToShoot");
+    startPoint = p.of(60.000, 10.900, 90);
+    DriveToShoot = p.of(60.000, 40.256, 90);
 
     follower.setPose(startPoint);
 
@@ -65,9 +50,7 @@ public class leaveBase extends SequentialCommandGroup {
   }
 
   public void buildPaths() {
-    startPointTODriveToShoot = line(startPoint, DriveToShoot).linear(
-      Math.toRadians(90),
-      Math.toRadians(90)
-    );
+    startPointTODriveToShoot =
+        line(startPoint, DriveToShoot).linear(Math.toRadians(90), Math.toRadians(90));
   }
 }
